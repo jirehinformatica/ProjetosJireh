@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsJireh" targetNamespace="http://tempuri.org/dsJireh.xsd" xmlns:mstns="http://tempuri.org/dsJireh.xsd" xmlns="http://tempuri.org/dsJireh.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsJireh" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsJireh" msprop:Generator_UserDSName="dsJireh">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Comprovante" msprop:Generator_TableClassName="ComprovanteDataTable" msprop:Generator_TableVarName="tableComprovante" msprop:Generator_TablePropName="Comprovante" msprop:Generator_RowDeletingName="ComprovanteRowDeleting" msprop:Generator_RowChangingName="ComprovanteRowChanging" msprop:Generator_RowEvHandlerName="ComprovanteRowChangeEventHandler" msprop:Generator_RowDeletedName="ComprovanteRowDeleted" msprop:Generator_UserTableName="Comprovante" msprop:Generator_RowChangedName="ComprovanteRowChanged" msprop:Generator_RowEvArgName="ComprovanteRowChangeEvent" msprop:Generator_RowClassName="ComprovanteRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Favorecido" msprop:Generator_ColumnVarNameInTable="columnFavorecido" msprop:Generator_ColumnPropNameInRow="Favorecido" msprop:Generator_ColumnPropNameInTable="FavorecidoColumn" msprop:Generator_UserColumnName="Favorecido" type="xs:string" minOccurs="0" />
+              <xs:element name="CPF" msprop:Generator_ColumnVarNameInTable="columnCPF" msprop:Generator_ColumnPropNameInRow="CPF" msprop:Generator_ColumnPropNameInTable="CPFColumn" msprop:Generator_UserColumnName="CPF" type="xs:string" minOccurs="0" />
+              <xs:element name="ContaCredito" msprop:Generator_ColumnVarNameInTable="columnContaCredito" msprop:Generator_ColumnPropNameInRow="ContaCredito" msprop:Generator_ColumnPropNameInTable="ContaCreditoColumn" msprop:Generator_UserColumnName="ContaCredito" type="xs:string" minOccurs="0" />
+              <xs:element name="ContaDebito" msprop:Generator_ColumnVarNameInTable="columnContaDebito" msprop:Generator_ColumnPropNameInRow="ContaDebito" msprop:Generator_ColumnPropNameInTable="ContaDebitoColumn" msprop:Generator_UserColumnName="ContaDebito" type="xs:string" minOccurs="0" />
+              <xs:element name="Empresa" msprop:Generator_ColumnVarNameInTable="columnEmpresa" msprop:Generator_ColumnPropNameInRow="Empresa" msprop:Generator_ColumnPropNameInTable="EmpresaColumn" msprop:Generator_UserColumnName="Empresa" type="xs:string" minOccurs="0" />
+              <xs:element name="CNPJ" msprop:Generator_ColumnVarNameInTable="columnCNPJ" msprop:Generator_ColumnPropNameInRow="CNPJ" msprop:Generator_ColumnPropNameInTable="CNPJColumn" msprop:Generator_UserColumnName="CNPJ" type="xs:string" minOccurs="0" />
+              <xs:element name="Banco" msprop:Generator_ColumnVarNameInTable="columnBanco" msprop:Generator_ColumnPropNameInRow="Banco" msprop:Generator_ColumnPropNameInTable="BancoColumn" msprop:Generator_UserColumnName="Banco" type="xs:string" minOccurs="0" />
+              <xs:element name="Vencimento" msprop:Generator_ColumnVarNameInTable="columnVencimento" msprop:Generator_ColumnPropNameInRow="Vencimento" msprop:Generator_ColumnPropNameInTable="VencimentoColumn" msprop:Generator_UserColumnName="Vencimento" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Valor" msprop:Generator_ColumnVarNameInTable="columnValor" msprop:Generator_ColumnPropNameInRow="Valor" msprop:Generator_ColumnPropNameInTable="ValorColumn" msprop:Generator_UserColumnName="Valor" type="xs:decimal" minOccurs="0" />
+              <xs:element name="AutenticacaoBancaria" msprop:Generator_ColumnVarNameInTable="columnAutenticacaoBancaria" msprop:Generator_ColumnPropNameInRow="AutenticacaoBancaria" msprop:Generator_ColumnPropNameInTable="AutenticacaoBancariaColumn" msprop:Generator_UserColumnName="AutenticacaoBancaria" type="xs:string" minOccurs="0" />
+              <xs:element name="NSA" msprop:Generator_ColumnVarNameInTable="columnNSA" msprop:Generator_ColumnPropNameInRow="NSA" msprop:Generator_ColumnPropNameInTable="NSAColumn" msprop:Generator_UserColumnName="NSA" type="xs:string" minOccurs="0" />
+              <xs:element name="DataArquivo" msprop:Generator_ColumnVarNameInTable="columnDataArquivo" msprop:Generator_ColumnPropNameInRow="DataArquivo" msprop:Generator_ColumnPropNameInTable="DataArquivoColumn" msprop:Generator_UserColumnName="DataArquivo" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="TipoCompromisso" msprop:Generator_ColumnVarNameInTable="columnTipoCompromisso" msprop:Generator_ColumnPropNameInRow="TipoCompromisso" msprop:Generator_ColumnPropNameInTable="TipoCompromissoColumn" msprop:Generator_UserColumnName="TipoCompromisso" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
