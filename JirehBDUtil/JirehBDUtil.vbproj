@@ -75,6 +75,7 @@
     <Compile Include="BD\Dal_SerialHd.vb" />
     <Compile Include="ChaveExecucao.vb" />
     <Compile Include="CriptografiaSistema.vb" />
+    <Compile Include="Email.vb" />
     <Compile Include="Geral.vb" />
     <Compile Include="InfoPC.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -98,6 +99,7 @@
     <Compile Include="MYSQL\MySQLParametros.vb" />
     <Compile Include="MYSQL\MySQLTransacao.vb" />
     <Compile Include="RegistroSistema.vb" />
+    <Compile Include="TratarErros.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

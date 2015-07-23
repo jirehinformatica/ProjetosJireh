@@ -66,6 +66,31 @@ Public Class Dal_MaquinasAtivas
         End Try
     End Sub
 
+    Public Sub Alterar(ByVal item As MaquinasAtivasColunms)
+        Try
+            Dim Parametros As New MySQLParametros
+            Conexao.Open()
+
+            TransacaoValue.BeginTransacao()
+
+            Dim Sintaxe As New Text.StringBuilder
+            Sintaxe.AppendFormat("UPDATE {0} SET ", TableName)
+            Sintaxe.AppendFormat("{0} = @{0} ", MaquinasAtivasColunmsName.Quantidade_maa)
+            Parametros.Add(MaquinasAtivasColunmsName.Quantidade_maa, item.Quantidade_maa, MySqlDbType.Int32)
+            Sintaxe.AppendFormat("WHERE {0} = @{0} ", MaquinasAtivasColunmsName.CnpjEmp_maa)
+            Parametros.Add(MaquinasAtivasColunmsName.CnpjEmp_maa, item.CnpjEmp_maa, MySqlDbType.VarChar)
+
+            Conexao.Execute(Sintaxe.ToString, Parametros, TransacaoValue)
+
+            TransacaoValue.CommitTransacao()
+        Catch ex As Exception
+            TransacaoValue.RollBackTransacao()
+            Throw
+        Finally
+            Conexao.Close()
+        End Try
+    End Sub
+
     Public Sub Excluir(ByVal Cnpj As String)
         Try
             Dim Parametros As New MySQLParametros

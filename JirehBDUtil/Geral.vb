@@ -17,13 +17,13 @@ Public Module Geral
     Private Const BDNomeRoot As String = "vieiramachado1"
     Private Const BDSenhaRoot As String = "Jireh0418"
 
-
     Public Property CnMySQL As MySQL
     Public Property InfoRegistro As ChaveExecucao
 
     Private ReadOnly Property Homologacao As Boolean
         Get
-            Return False
+            'Return False
+            Return True
         End Get
     End Property
 
@@ -263,4 +263,154 @@ Public Module Geral
 
 #End Region
 
+#Region "Validadores gerais"
+
+
+    <Extension()> _
+    Public Function IsCpfOrCnpjValid(ByVal Valor As String) As Boolean
+        Try
+            Dim valido As Boolean = ValidarCNPJ(Valor)
+            If Not valido Then
+                valido = ValidarCPF(Valor)
+            End If
+            Return valido
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+
+#Region "Funções privadas de validadores gerais"
+
+    Private Function CNPJCPFListaInvalidos(ByVal Valor As String) As Boolean
+        Try
+            Dim Lista() As String = {"111.111.111-11", "222.222.222-22", "333.333.333-33", _
+                         "444.444.444-44", "555.555.555-55", "666.666.666-66", _
+                         "777.777.777-77", "888.888.888-88", "999.999.999-99"}
+
+            Dim Valido As Boolean = Not (From i In Lista.AsEnumerable Where i = Valor).ToList.Count = 0
+
+            Return Valido
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Private Function ValidarCPF(ByVal Valor As String) As Boolean
+        Try
+            Valor = Valor.ToNumeros
+            If Valor.Length <> 11 OrElse CNPJCPFListaInvalidos(Valor) Then
+                Return False
+            End If
+
+            Dim Dv1 As Integer = Valor.Substring(9, 1).ToInteger
+            Dim Dv2 As Integer = Valor.Substring(10, 1).ToInteger
+            Dim Ch1 As Integer
+            Dim Ch2 As Integer
+
+            'Calculando o digito 1
+            Dim soma As Double = 0
+            Dim resto As Integer
+            Dim i As Integer
+            Dim p As Integer = 10
+            For i = 0 To 8
+                soma += Valor(i).ToInteger * p
+                p -= 1
+            Next
+            resto = soma Mod 11
+            If resto < 2 Then
+                Ch1 = 0
+            Else
+                Ch1 = 11 - resto
+            End If
+
+            'Calculando o digito 2
+            soma = 0
+            p = 11
+            For i = 0 To 9
+                soma += Valor(i).ToInteger * p
+                p -= 1
+            Next
+            resto = soma Mod 11
+            If resto < 2 Then
+                Ch2 = 0
+            Else
+                Ch2 = 11 - resto
+            End If
+
+            'Validando
+            If Ch1 <> Dv1 OrElse Ch2 <> Dv2 Then
+                Return False
+            End If
+
+            Return True
+        Catch exA As ArgumentException
+            Throw New Exception("Erro de argumentos Validando CNPJ : " & exA.Message, exA)
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Private Function ValidarCNPJ(ByVal Valor As String) As Boolean
+        Try
+            Valor = Valor.ToNumeros
+            If Valor.Length <> 14 OrElse CNPJCPFListaInvalidos(Valor) Then
+                Return False
+            End If
+
+            Dim Dv1 As Integer = Valor.Substring(12, 1).ToInteger
+            Dim Dv2 As Integer = Valor.Substring(13, 1).ToInteger
+            Dim Ch1 As Integer
+            Dim Ch2 As Integer
+
+            'Calculando o digito 1
+            Dim soma As Double = 0
+            Dim resto As Integer
+            Dim i As Integer
+            Dim p As Integer = 5
+            For i = 0 To 11
+                soma += Valor(i).ToInteger * p
+                p -= 1
+                If p = 1 Then p = 9
+            Next
+            resto = soma Mod 11
+            If resto < 2 Then
+                Ch1 = 0
+            Else
+                Ch1 = 11 - resto
+            End If
+
+            'Calculando o digito 2
+            soma = 0
+            p = 6
+            For i = 0 To 12
+                soma += Valor(i).ToInteger * p
+                p -= 1
+                If p = 1 Then p = 9
+            Next
+            resto = soma Mod 11
+            If resto < 2 Then
+                Ch2 = 0
+            Else
+                Ch2 = 11 - resto
+            End If
+
+            'Validando
+            If Ch1 <> Dv1 OrElse Ch2 <> Dv2 Then
+                Return False
+            End If
+
+            Return True
+        Catch exA As ArgumentException
+            Throw New Exception("Erro de argumentos Validando CNPJ : " & exA.Message, exA)
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+#End Region
+
+#End Region
+
 End Module
+

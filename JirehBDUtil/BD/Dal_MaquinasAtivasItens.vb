@@ -131,6 +131,29 @@ Public Class Dal_MaquinasAtivasItens
         End Try
     End Sub
 
+    Public Sub Excluir(ByVal Cnpj As String)
+        Try
+            Dim Parametros As New MySQLParametros
+            Conexao.Open()
+
+            TransacaoValue.BeginTransacao()
+
+            Dim Sintaxe As New Text.StringBuilder
+            Sintaxe.AppendFormat("DELETE FROM {0} ", TableName)
+            Sintaxe.AppendFormat("WHERE {0} = @{0} ", MaquinasAtivasItensColunmsName.CnpjEmp_mai)
+            Parametros.Add(MaquinasAtivasItensColunmsName.CnpjEmp_mai, Cnpj, MySqlDbType.VarChar)
+
+            Conexao.Execute(Sintaxe.ToString, Parametros, TransacaoValue)
+
+            TransacaoValue.CommitTransacao()
+        Catch ex As Exception
+            TransacaoValue.RollBackTransacao()
+            Throw
+        Finally
+            Conexao.Close()
+        End Try
+    End Sub
+
     Public Function Consultar(ByVal Cnpj As String, ByVal CodigoSerial As Integer) As MaquinasAtivasItensColunms
         Try
             Dim Parametros As New MySQLParametros
@@ -189,6 +212,10 @@ Public Class Dal_MaquinasAtivasItens
             Sintaxe.AppendFormat("SELECT * FROM {0} ", Dal_MaquinasAtivas.TableName)
             Sintaxe.AppendFormat("LEFT JOIN {0} ON {0}.{1} = {2}.{3} ", TableName, MaquinasAtivasItensColunmsName.CnpjEmp_mai, Dal_MaquinasAtivas.TableName, Dal_MaquinasAtivas.MaquinasAtivasColunmsName.CnpjEmp_maa)
             Sintaxe.AppendFormat("LEFT JOIN {0} ON {0}.{1} = {2}.{3} ", Dal_SerialHd.TableName, Dal_SerialHd.SerialHDColunmsName.Codigo_ser, TableName, MaquinasAtivasItensColunmsName.CodigoSer_mai)
+
+            Sintaxe.AppendFormat("LEFT JOIN {0} ON {0}.{1} = {2}.{3} ", Dal_SerialEmpresas.TableName, Dal_SerialEmpresas.SerialEmpresasColunmsName.CodigoSer_sem, TableName, MaquinasAtivasItensColunmsName.CodigoSer_mai)
+            Sintaxe.AppendFormat("      AND {0}.{1} = {2}.{3} ", Dal_SerialEmpresas.TableName, Dal_SerialEmpresas.SerialEmpresasColunmsName.CnpjEmp_sem, TableName, MaquinasAtivasItensColunmsName.CnpjEmp_mai)
+
             Sintaxe.AppendFormat("WHERE {1}.{0} = @{0} ", Dal_MaquinasAtivas.MaquinasAtivasColunmsName.CnpjEmp_maa, Dal_MaquinasAtivas.TableName)
             Parametros.Add(Dal_MaquinasAtivas.MaquinasAtivasColunmsName.CnpjEmp_maa, Cnpj, MySqlDbType.VarChar)
 
@@ -218,8 +245,9 @@ Public Class Dal_MaquinasAtivasItens
                             .Cadastro_mai = i.Field(Of Nullable(Of DateTime))(MaquinasAtivasItensColunmsName.Cadastro_mai).ToDate,
                             .CnpjEmp_mai = i.Field(Of String)(MaquinasAtivasItensColunmsName.CnpjEmp_mai).ToString,
                             .Serial_ser = i.Field(Of String)(Dal_SerialHd.SerialHDColunmsName.Serial_ser).ToString,
-                            .CodigoSer_mai = i.Field(Of Nullable(Of Integer))(MaquinasAtivasItensColunmsName.CodigoSer_mai).ToInteger
-                    }).ToList
+                            .CodigoSer_mai = i.Field(Of Nullable(Of Integer))(MaquinasAtivasItensColunmsName.CodigoSer_mai).ToInteger,
+                            .Estacao_sem = i.Field(Of Nullable(Of Integer))(Dal_SerialEmpresas.SerialEmpresasColunmsName.Estacao_sem).ToInteger
+                    }).Distinct.ToList
 
                 If Query2 IsNot Nothing Then
                     Dados.Maquinas = Query2
@@ -269,6 +297,7 @@ Public Class Dal_MaquinasAtivasItens
         Inherits MaquinasAtivasItensColunms
 
         Public Property Serial_ser As String
+        Public Property Estacao_sem As Integer
 
         Protected Friend Sub New()
 

@@ -130,6 +130,29 @@ Public Class Dal_SerialEmpresas
         End Try
     End Sub
 
+    Public Sub Excluir(ByVal Cnpj As String)
+        Try
+            Dim Parametros As New MySQLParametros
+            Conexao.Open()
+
+            TransacaoValue.BeginTransacao()
+
+            Dim Sintaxe As New Text.StringBuilder
+            Sintaxe.AppendFormat("DELETE FROM {0}", TableName)
+            Sintaxe.AppendFormat("WHERE @{0} = @{0} ", SerialEmpresasColunmsName.CnpjEmp_sem)
+            Parametros.Add(SerialEmpresasColunmsName.CnpjEmp_sem, Cnpj, MySqlDbType.VarChar)
+
+            Conexao.Execute(Sintaxe.ToString, Parametros, TransacaoValue)
+
+            TransacaoValue.CommitTransacao()
+        Catch ex As Exception
+            TransacaoValue.RollBackTransacao()
+            Throw
+        Finally
+            Conexao.Close()
+        End Try
+    End Sub
+
     Public Function ConsultarSerialPorCnpjLista(ByVal Cnpj As String) As List(Of SerialEmpresasColunms)
         Try
             Dim Tabela As DataTable = ConsultarSerialPorCnpjTable(Cnpj)

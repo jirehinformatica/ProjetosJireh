@@ -11,6 +11,13 @@ Public Class AtivadorSistema
                 Exit Sub
             End If
 
+            If Not txtCnpj.Text.IsCpfOrCnpjValid Then
+                Alerta("CPF ou CNPJ informado é inválido.")
+                Exit Sub
+            Else
+                lblValidarCnpj.Text = ""
+            End If
+
             lblStatus.Text = "Verificando se o hardware já foi cadastrado para está inscrição."
 
             Dim Tx As New MySQLTransacao(CnMySQL)
@@ -76,7 +83,7 @@ Public Class AtivadorSistema
                 End If
                 lblStatus.Text = "Validando a inscrição informada."
                 If existe Then
-                    GerEmp.Alterar(auxEmp)
+                    'GerEmp.Alterar(auxEmp)
                     auxSer = GerSer.ConsultarCnpjPorSerialLista(InfoRegistro.InformacoesUso.Serial, auxEmp.Cnpj_emp)
                 Else
                     GerEmp.Inserir(auxEmp)
@@ -204,6 +211,18 @@ Public Class AtivadorSistema
                 txtCnpj.Mask = "00,000,000/0000-00"
             Else
                 txtCnpj.Mask = "000,000,000-00"
+            End If
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Sub txtCnpj_LostFocus(sender As Object, e As EventArgs) Handles txtCnpj.LostFocus
+        Try
+            If Not txtCnpj.Text.IsCpfOrCnpjValid Then
+                lblValidarCnpj.Text = "CNPJ ou CPF informado inválido"
+            Else
+                lblValidarCnpj.Text = ""
             End If
         Catch ex As Exception
             TratarErros(ex)

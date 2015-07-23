@@ -99,6 +99,64 @@ Public Class Dal_ConveniosEmpresa
         End Try
     End Sub
 
+    Public Sub Excluir(ByVal Cnpj As String)
+        Try
+            Dim Parametros As New MySQLParametros
+            Conexao.Open()
+
+            TransacaoValue.BeginTransacao()
+
+            Dim Sintaxe As New Text.StringBuilder
+            Sintaxe.AppendFormat("DELETE FROM {0} ", TableName)
+            Sintaxe.AppendFormat("WHERE {0} = @{0} ", ConveniosEmpresaColunmsName.CnpjEmp_eco)
+            Parametros.Add(ConveniosEmpresaColunmsName.CnpjEmp_eco, Cnpj, MySqlDbType.VarChar)
+
+            Conexao.Execute(Sintaxe.ToString, Parametros, TransacaoValue)
+
+            TransacaoValue.CommitTransacao()
+        Catch ex As Exception
+            TransacaoValue.RollBackTransacao()
+            Throw
+        Finally
+            Conexao.Close()
+        End Try
+    End Sub
+
+    Public Sub Excluir(ByVal Item As ConveniosEmpresaColunms)
+        Try
+            Dim Parametros As New MySQLParametros
+            Conexao.Open()
+
+            TransacaoValue.BeginTransacao()
+
+            Dim Sintaxe As New Text.StringBuilder
+            Sintaxe.AppendFormat("DELETE FROM {0} ", TableName)
+            Sintaxe.AppendFormat("WHERE {0} = @{0} ", ConveniosEmpresaColunmsName.CnpjEmp_eco)
+            Parametros.Add(ConveniosEmpresaColunmsName.CnpjEmp_eco, Item.CnpjEmp_eco, MySqlDbType.VarChar)
+            Sintaxe.AppendFormat("AND {0} = @{0} ", ConveniosEmpresaColunmsName.Convenio_eco)
+            Parametros.Add(ConveniosEmpresaColunmsName.Convenio_eco, Item.Convenio_eco, MySqlDbType.VarChar)
+
+            Conexao.Execute(Sintaxe.ToString, Parametros, TransacaoValue)
+
+            TransacaoValue.CommitTransacao()
+        Catch ex As Exception
+            TransacaoValue.RollBackTransacao()
+            Throw
+        Finally
+            Conexao.Close()
+        End Try
+    End Sub
+
+    Public Function Consultar(ByVal Cnpj As String, ByVal Convenio As String) As ConveniosEmpresaColunms
+        Try
+            Dim Lista As List(Of ConveniosEmpresaColunms) = Consultar(Cnpj)
+            Dim Item As ConveniosEmpresaColunms = (From i In Lista.AsEnumerable Where i.Convenio_eco = Convenio).FirstOrDefault
+            Return Item
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
     Public Function Consultar(ByVal Cnpj As String) As List(Of ConveniosEmpresaColunms)
         Try
             Dim Parametros As New MySQLParametros
