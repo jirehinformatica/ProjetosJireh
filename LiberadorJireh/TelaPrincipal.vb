@@ -3,7 +3,14 @@ Public Class TelaPrincipal
 
     Public Sub TratarErros(ByVal ex As Exception)
         HabilitarControles(False)
+        Try
 
+            JirehBDUtil.TratarErros.Add(ex, "Ativador Jireh", Date.Now)
+            Alerta("Ocorreu um erro no sistema que foi enviado para correção. Menssagem = " & vbCrLf & ex.Message)
+
+        Catch exx As Exception
+            Alerta("Não foi possível validar os erros que ocorreu " & exx.Message & vbCrLf & "Erro que ocorreu no sistema : " & ex.Message)
+        End Try
     End Sub
 
     Public Sub Alerta(ByVal msg As String)
