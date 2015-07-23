@@ -80,7 +80,7 @@ Public Class Dal_ConveniosEmpresa
 
             Dim Sintaxe As New Text.StringBuilder
             Sintaxe.AppendFormat("UPDATE {0} SET ", TableName)
-            Sintaxe.AppendFormat("{0} = @{0}, ", ConveniosEmpresaColunmsName.Ativo_eco)
+            Sintaxe.AppendFormat("{0} = @{0} ", ConveniosEmpresaColunmsName.Ativo_eco)
             Parametros.Add(ConveniosEmpresaColunmsName.Ativo_eco, Item.Ativo_eco, MySqlDbType.Bit)
 
             Sintaxe.AppendFormat("WHERE {0} = @{0} ", ConveniosEmpresaColunmsName.CnpjEmp_eco)

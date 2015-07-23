@@ -57,10 +57,12 @@ Public Class TratarErros
             End If
 
             If (Not chamada AndAlso ForcarEnvio) OrElse Local.PrimeiroErro Then
-                chamada = True
+                chamada = Local.Lista.Count > 0
             End If
 
-            Local.TransmitirErros()
+            If chamada Then
+                Local.TransmitirErros()
+            End If
 
         Catch ex As Exception
             'Naõ foi possivel a transmição

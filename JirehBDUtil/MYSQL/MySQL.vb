@@ -203,7 +203,11 @@ Public Class MySQL
             Dim da As New MySqlDataAdapter(commad)
             Dim ds As New DataSet
             da.Fill(ds)
-            da.FillSchema(ds, SchemaType.Source)
+            Try
+                da.FillSchema(ds, SchemaType.Source)
+            Catch exx As Exception
+                'Não vai carregar o schema em caso de erros
+            End Try
             Return ds
 
         Catch exM As MySqlException

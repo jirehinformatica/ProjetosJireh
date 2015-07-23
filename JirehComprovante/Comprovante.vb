@@ -184,6 +184,10 @@ Public Class Comprovante
 
     Private Sub Totalizar()
         Try
+            If Lista Is Nothing Then
+                lblSubRelatorio.Text = "Quantidade: 0000   -   Valor Total: R$ 0.00"
+                Exit Sub
+            End If
             Dim Total As List(Of JirehReports.ComprovantePagamentoReport.ItemComprovantePagamento)
             Total = (From i In Lista.AsParallel Where i.Valido).ToList.Select(Function(c As JirehReports.ComprovantePagamentoReport.ItemComprovantePagamento)
                                                                                   If c.Ocorrencia.Substring(0, 2) <> "00" Then

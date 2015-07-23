@@ -57,7 +57,12 @@
     End Sub
 
     Public Sub TratarErros(ByVal ex As Exception)
-
+        Try
+            JirehBDUtil.TratarErros.Add(ex, "JirehComprovante", DataHoraServidor)
+            Alerta("Ocorreu uma falha no sistema. Tente executar a operação novamente. A falha ocorrida já foi enviada para ser analisada e feito a correção. Qualquer duvida entre em contato com o suporte do sistema.")
+        Catch exx As Exception
+            Alerta("Ocorreu uma falha no sistema que será corrigida. Favor entre em contato com o suporte e informe do ocorrido." & vbCrLf & "Menssagem : " & ex.Message)
+        End Try
     End Sub
 
 

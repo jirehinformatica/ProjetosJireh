@@ -45,11 +45,11 @@ Public Class TelaPrincipal
             Dim aux2 As String() = aux.ToString.Split("|")
 
             Dim novo As New MaquinaSelecionada
-            novo.Data = aux2(0).Replace("_", "").ToDate
-            novo.Ativo = aux2(1).Replace("_", "").ToBool
-            novo.Terminal = aux2(2).Replace("_", "").ToInteger
-            novo.Codigo = aux2(3).Replace("_", "").ToInteger
-            novo.Serial = aux2(4).Replace("_", "").ToString
+            novo.Data = aux2(0).Replace("_", "").Trim.ToDate
+            novo.Ativo = aux2(1).Replace("_", "").Trim.ToBool
+            novo.Terminal = aux2(2).Replace("_", "").Trim.ToInteger
+            novo.Codigo = aux2(3).Replace("_", "").Trim.ToInteger
+            novo.Serial = aux2(4).Replace("_", "").Trim.ToString
             Return novo
         Catch ex As Exception
             Throw
@@ -103,8 +103,8 @@ Public Class TelaPrincipal
             Dim aux2 As String() = aux.ToString.Split("|")
 
             Dim novo As New ConveniosSelecionado
-            novo.Ativo = aux2(0).Replace("_", "").ToBool
-            novo.Convenio = aux2(1).Replace("_", "").ToString
+            novo.Ativo = aux2(0).Replace("_", "").Trim.ToBool
+            novo.Convenio = aux2(1).Replace("_", "").ToString.Trim
             Return novo
         Catch ex As Exception
             Throw

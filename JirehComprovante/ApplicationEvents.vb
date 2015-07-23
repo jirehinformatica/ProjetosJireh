@@ -109,6 +109,14 @@
             TimeSistema.Dispose()
             MyBase.OnShutdown()
         End Sub
+
+        Private Sub MyApplication_Shutdown(sender As Object, e As EventArgs) Handles Me.Shutdown
+            Try
+                JirehBDUtil.TratarErros.EnviarErros(DataHoraServidor, True)
+            Catch ex As Exception
+                'Não foi possivel completar a operação
+            End Try
+        End Sub
     End Class
 
 End Namespace
