@@ -6,6 +6,7 @@
     Private FormAberto As Integer
 
     Public Property DataHoraServidor As DateTime
+    Public Property PathAplicativo As String
 
     Public Sub SetMDI(ByRef value As Form)
         FormAberto = 0

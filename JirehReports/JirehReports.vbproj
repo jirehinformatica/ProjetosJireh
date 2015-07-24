@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsJireh.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Geral.vb" />
     <Compile Include="IReports.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">

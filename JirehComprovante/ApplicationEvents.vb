@@ -91,9 +91,16 @@
                 End If
 
                 F.AddPasso("Ativando o terminal")
+                F.AddPasso("Validando os convênios de uso do sistema")
+
                 FormularioMDI.SetTerminal(JirehBDUtil.InfoRegistro.InformacoesUso.Estacao)
 
-                F.AddPasso("Validando os convênios de uso do sistema")
+                F.AddPasso("Pegando a pasta do executável")
+                Dim aux As String = Application.Info.DirectoryPath
+                If aux.Substring(aux.Length - 1, 1) <> "\" Then
+                    aux &= "\"
+                End If
+                PathAplicativo = aux
 
                 Threading.Thread.Sleep(500)
 

@@ -12,6 +12,15 @@ Public Class Comprovante
 
         ' Add any initialization after the InitializeComponent() call.
         CriouColTodos = False
+
+        Try
+            Dim Rel As New JirehReports.ComprovantePagamentoReport
+            If Not IO.File.Exists(PathAplicativo & Rel.NameLocalReport) Then
+                JirehReports.CarregarReport(PathAplicativo, Rel.NameLocalReport)
+            End If
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
     End Sub
 
     Private Sub cbo_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs)
