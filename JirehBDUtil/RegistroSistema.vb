@@ -6,7 +6,7 @@ Public Class RegistroSistema
     Private AplicacaoKey As RegistryKey
 
     Public Sub New(ByVal NomeAplicacao As String)
-        ChavePrincipal = Registry.LocalMachine.OpenSubKey("Software", True)
+        ChavePrincipal = Registry.CurrentUser.OpenSubKey("Software", True)
         Dim nomes As String() = ChavePrincipal.GetSubKeyNames
         Dim achou As Boolean = False
         For Each s As String In nomes
