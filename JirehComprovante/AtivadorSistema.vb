@@ -149,7 +149,7 @@ Public Class AtivadorSistema
 
             Dim aux As Dal_MaquinasAtivasItens.MaquinasAtivasItensSerialColunms = Maquina.ConsultarSerial(InfoRegistro.InformacoesUso.Serial)
             If aux IsNot Nothing AndAlso aux.Ativou_mai Then
-                Alerta("Este hardware já está registrado. Não é possível ativá-lo novamente. Entre em contato com o suporte.")
+                Alerta("Este hardware já está registrado. Não é possível ativá-lo novamente. Entre em contato com o suporte." & vbCrLf & "Número do terminal de ativação = " & aux.Estacao_sem.ToString("000") & ".")
                 Close()
                 Exit Sub
             ElseIf aux IsNot Nothing Then
