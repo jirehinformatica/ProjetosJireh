@@ -138,8 +138,12 @@ Public Class AtivadorSistema
                 Exit Sub
             End If
 
-            Dim valido As Boolean = (Maquina.Quantidade_maa > 0 AndAlso Maquina.Maquinas IsNot Nothing AndAlso Maquina.Maquinas.Count <= Maquina.Quantidade_maa) _
-                OrElse (Maquina.Quantidade_maa > 0 AndAlso Maquina.Maquinas Is Nothing)
+            Dim QtdeAtivas As Integer = 0
+            If Maquina.Maquinas IsNot Nothing Then
+                QtdeAtivas = (From i In Maquina.Maquinas.AsEnumerable Where i.Ativou_mai).ToList.Count
+            End If
+
+            Dim valido As Boolean = (Maquina.Quantidade_maa > 0 AndAlso QtdeAtivas < Maquina.Quantidade_maa) OrElse (Maquina.Quantidade_maa > 0 AndAlso Maquina.Maquinas Is Nothing)
 
             lblStatus.Text = "Verificando se o sistema já foi ativado."
 
