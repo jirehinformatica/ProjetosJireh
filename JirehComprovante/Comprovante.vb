@@ -16,7 +16,14 @@ Public Class Comprovante
         Try
             Dim Rel As New JirehReports.ComprovantePagamentoReport
             If Not IO.File.Exists(PathAplicativo & Rel.NameLocalReport) Then
-                JirehReports.CarregarReport(PathAplicativo, Rel.NameLocalReport)
+                Alerta("É necessário informar o arquivo do relatório para impressão. Isso será pedido somente desta vez.")
+                Dim Selecionar As New JirehBDUtil.Arquivos
+                Selecionar.AddSelecionarFiltros("Arquivo Reports", "rdlc")
+                If Selecionar.SelecionarUmArquivo Then
+                    Selecionar.Copiar(Selecionar.ArquivoSelecionadoPath, PathAplicativo & Rel.NameLocalReport)
+                Else
+                    Alerta("Não foi possível copiar o arquivo do report na pasta da aplicação. Esse processo deverá ser feito manualmente." & vbCrLf & "Copie o arquivo para essa pasta " & PathAplicativo)
+                End If
             End If
         Catch ex As Exception
             TratarErros(ex)

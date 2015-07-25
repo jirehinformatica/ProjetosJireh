@@ -67,6 +67,7 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Arquivos.vb" />
     <Compile Include="BD\Dal_ConveniosEmpresa.vb" />
     <Compile Include="BD\Dal_Empresas.vb" />
     <Compile Include="BD\Dal_Geral.vb" />
