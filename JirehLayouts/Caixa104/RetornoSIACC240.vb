@@ -329,7 +329,7 @@
     Public Class tpHeaderLote
 
         Public Sub New()
-            Ocorrencia = New ArquivoOcorrencia
+            Ocorrencia = New ArquivoOcorrencia("00")
         End Sub
 
         Public Property Ocorrencia As ArquivoOcorrencia
@@ -504,6 +504,25 @@ Public Enum TipoCompromissoSIACC240
     Autopagamento = 3
     SalarioAmpliacaoDeBase = 6
     DebitoEmConta = 11
+End Enum
+
+Public Enum TipoServicoCNAB240
+    Nenhum = 0
+    Cobranca = 1
+    CobrancaSemPapel = 2
+    BloquetoEletronico = 3
+    ConciliacaoBancaria = 4
+    Debitos = 5
+    PagamentoDividendos = 10
+    PagamentoFornecedor = 20
+    PagamentoSalarios = 30
+    PagamentoSinistrosSegurados = 50
+    PagamentoDespesasViajanteEmTransito = 60
+    PagamentoAutorizado = 70
+    PagamentoCredenciados = 75
+    PagamentoRepresentantes_VendedoresAutorizados = 80
+    PagamentoBeneficios = 90
+    PagamentoDiversos = 98
 End Enum
 
 Public Enum TipoMovimentoSIACC240

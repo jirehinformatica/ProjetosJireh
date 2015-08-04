@@ -1,6 +1,16 @@
 ﻿Public Class ArquivoOcorrencia
 
-    Public Sub New()
+    Private OcorrenciaValidaValue As String
+    Private Function ValidaOcorrencia(ByVal Valor As String) As Boolean
+        Try
+            Return Valor.IndexOf(OcorrenciaValidaValue) > 0
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Public Sub New(ByVal TipoOcorrenciaValida_sepPipe As String)
+        OcorrenciaValidaValue = TipoOcorrenciaValida_sepPipe
         QuantidadeOcorrenciasValue = 0
         SucessoValue = False
         Mensagem01Value = String.Empty
@@ -15,6 +25,8 @@
             Select Case NomeTabela
                 Case NameTabelaOcorrecia.G059
                     CarregarG059()
+                Case NameTabelaOcorrecia.G053SEmPapel
+                    CarregarSemPapel()
             End Select
 
             Dim aux As String
@@ -23,11 +35,7 @@
                 Select Case QuantidadeOcorrenciasValue
                     Case 0
                         aux = ColunaOcorrecia.Substring(ini, 2)
-                        If aux = "00" Then
-                            SucessoValue = True
-                        Else
-                            SucessoValue = False
-                        End If
+                        SucessoValue = ValidaOcorrencia(aux)
                         Mensagem01Value = BuscarOcorrencia(aux)
                         QuantidadeOcorrenciasValue += 1
                     Case 1
@@ -148,6 +156,25 @@
         End Try
     End Sub
 
+    Private Sub CarregarSemPapel()
+        Try
+            TabelaOcorrencia = New Dictionary(Of String, String)
+
+            TabelaOcorrencia.Add("01", "01 - Controle do registro header inválido")
+            TabelaOcorrencia.Add("02", "02 - Código de remessa diferente de '1'")
+            TabelaOcorrencia.Add("03", "03 - Data de geração inválida ou diferente de D+0")
+            TabelaOcorrencia.Add("04", "04 - Número seqüencial do arquivo não numérico ou fora de seqüência")
+            TabelaOcorrencia.Add("05", "05 - Número da versão do layout do arquivo inválido")
+            TabelaOcorrencia.Add("06", "06 - Tipo de serviço diferente de '02'")
+            TabelaOcorrencia.Add("07", "07 - Controle do registro trailer inválido")
+            TabelaOcorrencia.Add("08", "08 - Arquivo não aceito - Totais do arquivo com diferença")
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+
 #Region "PROPRIEDADES"
 
     Private Mensagem01Value As String
@@ -205,4 +232,5 @@ End Class
 
 Public Enum NameTabelaOcorrecia
     G059 = 0
+    G053SEmPapel = 1
 End Enum
