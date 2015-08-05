@@ -5,7 +5,7 @@
         MyBase.New(PathArquivoRetorno, EventoEmExecucao, 240)
         Try
             HeaderArquivo = New tpHeaderArquivo
-            'HeaderLote = New tpHeaderLote
+            HeaderLote = New List(Of tpHeaderLote)
             'ItensArquivo = New List(Of tpItemArquivo)
             'Dim Item As tpItemArquivo = Nothing
             For I As Long = 0 To LinhasCount - 1
@@ -22,7 +22,13 @@
 
                 'Buscando header de lote (posição 8 = 1)
                 If Ler(I, 8, 1) = "1" Then
+                    HeaderLoteAtual = New tpHeaderLote(HeaderArquivo.Ocorrencia.Sucesso)
                     ExeLote(I)
+                End If
+
+                'Buscando Trailer de lote (posição 8 = 5)
+                If Ler(I, 8, 1) = "5" Then
+                    HeaderLote.Add(HeaderLoteAtual)
                 End If
 
             Next
@@ -95,7 +101,7 @@
                 Exit Sub
             End If
 
-            With HeaderLote
+            With HeaderLoteAtual
 
                 If Not HeaderArquivo.Ocorrencia.Sucesso Then
                     Exit Sub
@@ -194,13 +200,15 @@
 
 #Region "PROPRIEDADES HEADER LOTE"
 
-    Public Property HeaderLote As tpHeaderLote
+    Private Property HeaderLoteAtual As tpHeaderLote
+    Public Property HeaderLote As List(Of tpHeaderLote)
 
     Public Class tpHeaderLote
 
         Private ArquivoValidoValue As Boolean
         Public Sub New(ByVal ArquivoValido As Boolean)
             ArquivoValidoValue = ArquivoValido
+            SegmentoE = New List(Of tpItemExtrato)
         End Sub
 
         Public Property OperacaoDCE As String
@@ -262,7 +270,6 @@
         End Property
         Public Property NumeroSeqExtrato As Integer
 
-
         Public ReadOnly Property AgenciaEContaCompleto As String
             Get
                 If Not ArquivoValidoValue Then
@@ -271,6 +278,8 @@
                 Return ContaCorrenteAgencia.Substring(1) & "." & ContaCorrenteNumero.Substring(1, 3) & "." & ContaCorrenteNumero.Substring(4, 8) & "-" & ContaCorrenteNumeroDv
             End Get
         End Property
+
+        Public SegmentoE As List(Of tpItemExtrato)
 
     End Class
 
@@ -329,7 +338,21 @@
         'LANÇAMENTO PARTE DO LAYOUT
 
         Public Property DataLancamento As DateTime
-
+        Public Property ValorLancamento As Decimal
+        Public Property TipoLancamento As String
+        Public ReadOnly Property TipoLancamentoDescricao As String
+            Get
+                If TipoLancamento.ToUpper = "D" Then
+                    Return "DÉBITO"
+                Else
+                    Return "CRÉDITO"
+                End If
+            End Get
+        End Property
+        Public Property Categoria As String
+        Public Property CodigoHistorico As String
+        Public Property DescricaoHistorico As String
+        Public Property NumeroDocumento As String
 
         Public Property TipoComplemento As String
         Private ComplementoTipoLancamentoValue As String
@@ -387,13 +410,86 @@
 
 #End Region
 
+#Region "PROPRIEDADES TRAILER DO LOTE"
+
+    Public Class TpTrailerLote
+
+        Private ArquivoValidoValue As Boolean
+        Public Sub New(ByVal ArquivoValido As Boolean)
+            ArquivoValidoValue = ArquivoValido
+        End Sub
+
+        Public Property CodigoBancoArquivo As Integer
+        Public Property LoteServico As String
+        Public Property TipoInscricao As TipoInscricao
+        Private NumeroInscricaoValue As String
+        Public Property NumeroInscricao As String
+            Get
+                If Not ArquivoValidoValue Then
+                    Return String.Empty
+                End If
+                If TipoInscricao = JirehLayouts.TipoInscricao.CPF Then
+                    Return NumeroInscricaoValue.Substring(3, 3) & "." & NumeroInscricaoValue.Substring(6, 3) & "." & NumeroInscricaoValue.Substring(9, 3) & "-" & NumeroInscricaoValue.Substring(12, 2)
+                Else
+                    Return NumeroInscricaoValue.Substring(0, 2) & "." & NumeroInscricaoValue.Substring(2, 3) & "." & NumeroInscricaoValue.Substring(5, 3) & "/" & NumeroInscricaoValue.Substring(8, 4) & "-" & NumeroInscricaoValue.Substring(12, 2)
+                End If
+            End Get
+            Set(value As String)
+                NumeroInscricaoValue = value
+            End Set
+        End Property
+        Public Property CodigoConvenio As String
+        Public Property ContaCorrenteAgencia As String
+        Public Property ContaCorrenteAgenciaDv As String
+        Public Property ContaCorrenteNumero As String
+        Public Property ContaCorrenteNumeroDv As String
+
+        Public Property SaldoBloqueado24 As String
+        Public Property LimiteConta As Decimal
+        Public Property SaldoBloqueado As Decimal
+        Public Property DataSaldoFinal As DateTime
+        Public Property ValorSaldoFinal As Decimal
+        Private SituacaoDCValue As String
+        Public Property SituacaoDC As String
+            Get
+                If SituacaoDCValue.ToUpper = "D" Then
+                    Return "D - DEVEDOR"
+                Else
+                    Return "C - CREDOR"
+                End If
+            End Get
+            Set(value As String)
+                SituacaoDCValue = value
+            End Set
+        End Property
+        Private StatusPFValue As String
+        Public Property StatusPF As String
+            Get
+                If StatusPFValue.ToUpper = "P" Then
+                    Return "P - PARCIAL"
+                Else
+                    Return "F - FINAL"
+                End If
+            End Get
+            Set(value As String)
+                StatusPFValue = value
+            End Set
+        End Property
+        Public Property TotalRegistros As Integer
+        Public Property TotalDebito As Decimal
+        Public Property TotalCredito As Decimal
+
+    End Class
+
+#End Region
+
     Public Overrides Function ArquivoValido(NumeroConvenios As String) As Boolean
         Try
             If Not ArquivoValidoValue Then
                 Return False
             End If
 
-            Dim Existe As Integer = (From i In NumeroConvenios.Split(";").AsEnumerable Where i.Trim = HeaderLote.CodigoConvenio.Trim).ToList.Count
+            Dim Existe As Integer = (From i In NumeroConvenios.Split(";").AsEnumerable Where i.Trim = HeaderLoteAtual.CodigoConvenio.Trim).ToList.Count
             ArquivoValidoValue = Existe > 0
 
             If Not ArquivoValidoValue Then
