@@ -97,50 +97,44 @@
 
             With HeaderLote
 
-                '1.31 231 240 X(010) Ocorrências
-                .Ocorrencia.SetOcorrencia(Ler(Linha, 231, 10), NameTabelaOcorrecia.G059)
-                If Not .Ocorrencia.Sucesso Then
+                If Not HeaderArquivo.Ocorrencia.Sucesso Then
                     Exit Sub
                 End If
-                '0.01 001 003 9(003) Código do Banco
+                '01.1	BANCO	CÓDIGO DO BANCO NA COMPENSAÇÃO	1	3	3	
                 .CodigoBancoArquivo = Ler(Linha, 1, 3).ToInteger(0)
-                '1.02 004 007 9(004) Lote de Serviço
+                '02.1	LOTE	LOTE DE SERVIÇO	4	7	4	-	NUMÉRICO
                 .LoteServico = Ler(Linha, 4, 4)
-                '1.04 009 009 X(001) Tipo de Operação
+                '04.1	OPERAÇÃO	TIPO DE OPERAÇÃO	9	9	1	-	'E'= EXTRATO C/C	3
                 .OperacaoDCE = Ler(Linha, 9, 1)
-                '1.07 014 016 9(003) Versão do leiaute do lote
+                '07.1	LAYOUT DO LOTE	N.º DA VERSÃO DO LAYOUT DO LOTE	14	16	3	-	'030'	45
                 .VersaoNoLote = Ler(Linha, 14, 3)
-                '1.09 018 018 9(001) Tipo de inscrição
+                '09.1	Inscrição	TIPO	TIPO DE INSCRIÇÃO DA EMPRESA	18	18	1	-	NUMÉRICO	30
                 .TipoInscricao = Ler(Linha, 18, 1).ToInteger(1)
-                '1.10 019 032 9(014) Número da inscrição
+                '10.1	NÚMERO	N.º DE INSCRIÇÃO DA EMPRESA	19	32	14	-	NUMÉRICO	30
                 .NumeroInscricao = Ler(Linha, 19, 14)
-                '1.11 033 038 9(006) Código Convênio no Banco
-                .CodigoConvenio = Ler(Linha, 33, 6)
-                '1.12 039 040 9(002) Tipo de Compromisso
-                .TipoCompromisso = Ler(Linha, 39, 2).ToInteger
-                '1.16 053 057 9(005) Agencia da Conta Corrente
+                '11.1	CÓDIGO DO CONVÊNIO NO BANCO (AAAAOOOCCCCCCCCD)	33	52	20	-	NUMÉRICO	7
+                .CodigoConvenio = Ler(Linha, 33, 20)
+                '12.1	CÓDIGO	AGÊNCIA MANTENEDORA DA CONTA (AAAA)	53	57	5	-	NUMÉRICO	8
                 .ContaCorrenteAgencia = Ler(Linha, 53, 5)
-                '1.17 058 058 X(001) DV da Agência
+                '13.1	DÍGITO VERIFICADOR DA AGÊNCIA (Módulo 11)	58	58	1	-	NUMÉRICO	8
                 .ContaCorrenteAgenciaDv = Ler(Linha, 58, 1)
-                '1.18 059 070 9(012) Número da Conta Corrente
+                '14.1	NÚMERO	NÚMERO DA CONTA CORRENTE (0000CCCCCCCC)	59	70	12	-	NUMÉRICO	8
                 .ContaCorrenteNumero = Ler(Linha, 59, 12)
-                '1.19 071 071 X(001) DV da Conta Corrente
+                '15.1	DV	DÍGITO VERIFICADOR DA CONTA (Módulo 11)	71	71	1	-	NUMÉRICO	8
                 .ContaCorrenteNumeroDv = Ler(Linha, 71, 1)
-                '1.21 073 102 X(030) Nome da Empresa
+                '17.1		NOME	NOME DA EMPRESA	73	102	30	-	ALFANUMÉRICO
                 .NomeEmpresa = Ler(Linha, 73, 30)
-                '1.23 143 172 X(030) Logradouro
-                .EnderecoLogradouro = Ler(Linha, 143, 30)
-                '1.24 173 177 9(005) Número no local
-                .EnderecoNumero = Ler(Linha, 173, 5)
-                '1.25 178 192 X(015) Complemento
-                .EnderecoComplemento = Ler(Linha, 178, 15)
-                '1.26 193 212 X(020) Cidade
-                .EnderecoCidade = Ler(Linha, 193, 20)
-                '1.27 213 217 9(005) CEP
-                '1.28 218 220 X(003) Complemento CEP
-                .EnderecoCEP = Ler(Linha, 213, 8)
-                '1.29 221 222 X(002) Sigla do Estado
-                .EnderecoEstado = Ler(Linha, 221, 2)
+
+                '19.1	DATA DO SALDO INICIAL	143	150	8	-	NUMÉRICO (DDMMAAAA)
+                .DataSaldoInicio = Ler(Linha, 143, 8).ToDateTimeConvert("ddMMyyyy")
+                '20.1	VALOR DO SALDO INICIAL	151	168	16	2	NUMÉRICO
+                .ValorSaldoInicio = Ler(Linha, 151, 18).ToDecimal100
+                '21.1	SITUAÇÃO DO SALDO INICIAL (D/C)	169	169	1	-	'D'=DEVEDOR 'C'=CREDOR
+                .SituacaoDC = Ler(Linha, 169, 1)
+                '22.1	POSIÇÃO DO SALDO INICIAL	170	170	1	-	'P'=PARCIAL 'F'=FINAL
+                .StatusPF = Ler(Linha, 170, 1)
+                '24.1	N° DE SEQUÊNCIA DO EXTRATO	174	178	5	-	NUMÉRICO
+                .NumeroSeqExtrato = Ler(Linha, 174, 5)
 
             End With
 
@@ -266,7 +260,7 @@
                 StatusPFValue = value
             End Set
         End Property
-
+        Public Property NumeroSeqExtrato As Integer
 
 
         Public ReadOnly Property AgenciaEContaCompleto As String
@@ -278,6 +272,117 @@
             End Get
         End Property
 
+    End Class
+
+#End Region
+
+#Region "Seg E"
+
+    Public Class tpItemExtrato
+
+        Private ArquivoValidoValue As Boolean
+        Public Sub New(ByVal ArquivoValido As Boolean)
+        End Sub
+
+        Public Property CodigoBancoArquivo As Integer
+        Public Property LoteServico As String
+        Public Property NumeroSequencia As Integer
+        Public Property TipoInscricao As TipoInscricao
+        Private NumeroInscricaoValue As String
+        Public Property NumeroInscricao As String
+            Get
+                If Not ArquivoValidoValue Then
+                    Return String.Empty
+                End If
+                If TipoInscricao = JirehLayouts.TipoInscricao.CPF Then
+                    Return NumeroInscricaoValue.Substring(3, 3) & "." & NumeroInscricaoValue.Substring(6, 3) & "." & NumeroInscricaoValue.Substring(9, 3) & "-" & NumeroInscricaoValue.Substring(12, 2)
+                Else
+                    Return NumeroInscricaoValue.Substring(0, 2) & "." & NumeroInscricaoValue.Substring(2, 3) & "." & NumeroInscricaoValue.Substring(5, 3) & "/" & NumeroInscricaoValue.Substring(8, 4) & "-" & NumeroInscricaoValue.Substring(12, 2)
+                End If
+            End Get
+            Set(value As String)
+                NumeroInscricaoValue = value
+            End Set
+        End Property
+        Public Property CodigoConvenio As String
+        Public Property TipoServico As TipoServicoCNAB240
+        Public Property ContaCorrenteAgencia As String
+        Public Property ContaCorrenteAgenciaDv As String
+        Public Property ContaCorrenteNumero As String
+        Public Property ContaCorrenteNumeroDv As String
+        Public Property NomeEmpresa As String
+        Private CPMFValue As String
+        Public Property CPMF As String
+            Get
+                If CPMFValue.ToUpper = "S" Then
+                    Return "ISENTO"
+                Else
+                    Return "NÃO ISENTO"
+                End If
+            End Get
+            Set(value As String)
+                CPMFValue = value
+            End Set
+        End Property
+        Public Property DataContabil As DateTime
+
+        'LANÇAMENTO PARTE DO LAYOUT
+
+        Public Property DataLancamento As DateTime
+
+
+        Public Property TipoComplemento As String
+        Private ComplementoTipoLancamentoValue As String
+        Public ReadOnly Property ComplementoBancoOrigem As Integer
+            Get
+                'Tipo do lançamento :
+                '00 – sem informação do complemento do lançamento
+                '01 – identificação da origem do lançamento
+                'Complemento do lançamento
+                'Para Tipo = 01 o campo terá o seguinte formato
+                'Banco origem lançamento 114 116 3 numérico
+                'Agência origem lançamento 117 121 5 numérico
+                'Uso exclusivo Febraban/CNAB 122 133 12 brancos
+                Return Ler(ComplementoTipoLancamentoValue, 0, 3).ToInteger
+            End Get
+        End Property
+        Public ReadOnly Property ComplementoAgenciaOrigem As String
+            Get
+                'Tipo do lançamento :
+                '00 – sem informação do complemento do lançamento
+                '01 – identificação da origem do lançamento
+                'Complemento do lançamento
+                'Para Tipo = 01 o campo terá o seguinte formato
+                'Banco origem lançamento 114 116 3 numérico
+                'Agência origem lançamento 117 121 5 numérico
+                'Uso exclusivo Febraban/CNAB 122 133 12 brancos
+                Return Ler(ComplementoTipoLancamentoValue, 3, 5)
+            End Get
+        End Property
+        Public WriteOnly Property ComplementoTipoLancamento As String
+            Set(value As String)
+                ComplementoTipoLancamentoValue = value
+            End Set
+        End Property
+
+        Protected Function Ler(ByVal Linha As String, ByVal Inicio As Integer, Optional ByVal Tamanho As Integer = -1) As String
+            Try
+                If ArquivoValidoValue Then
+                    If Inicio = 0 Then
+                        Inicio = 1
+                    End If
+                    Inicio -= 1
+                    If Tamanho = -1 Then
+                        Return Linha.Substring(Inicio).Trim
+                    End If
+                    Return Linha.Substring(Inicio, Tamanho).Trim
+                Else
+                    Return String.Empty
+                End If
+            Catch ex As Exception
+                Throw
+            End Try
+        End Function
     End Class
 
 #End Region
@@ -308,4 +413,95 @@
         End Get
     End Property
 
+
+    Protected Friend Class CategoriaLancamento
+
+        Private Shared Lancamentos As Dictionary(Of String, String)
+
+        Public Shared Function GetCategoriaLancamento(ByVal Valor As String) As String
+            Try
+                If Lancamentos Is Nothing Then
+                    CarregarLancamentos()
+                End If
+
+                If Lancamentos.ContainsKey(Valor.Trim) Then
+                    Return Lancamentos(Valor.Trim)
+                Else
+                    Return String.Empty
+                End If
+
+            Catch ex As Exception
+                Throw
+            End Try
+        End Function
+
+        Private Shared Sub CarregarLancamentos()
+            Try
+                Lancamentos = New Dictionary(Of String, String)
+
+                Lancamentos.Add("101", "Cheques")
+                Lancamentos.Add("102", "Encargos")
+                Lancamentos.Add("103", "Estornos")
+                Lancamentos.Add("104", "Lançamento Avisado")
+                Lancamentos.Add("105", "Tarifas.")
+                Lancamentos.Add("106", "Aplicação.")
+                Lancamentos.Add("107", "Empréstimo/Financiamento")
+                Lancamentos.Add("108", "Câmbio.")
+                Lancamentos.Add("109", "CPMF.")
+                Lancamentos.Add("110", "IOF")
+                Lancamentos.Add("111", "Imposto de Renda")
+                Lancamentos.Add("112", "Pagamento Fornecedores")
+                Lancamentos.Add("113", "Pagamento Funcionários")
+                Lancamentos.Add("114", "Saque Eletrônico")
+                Lancamentos.Add("115", "Ações")
+                Lancamentos.Add("116", "Seguro")
+                Lancamentos.Add("117", "Transferência Entre Contas")
+                Lancamentos.Add("118", "Devolução da Compensação")
+                Lancamentos.Add("119", "Devolução de Cheque Depositado")
+                Lancamentos.Add("120", "DOC Enviado")
+                Lancamentos.Add("121", "Antecipação a Fornecedores")
+                Lancamentos.Add("122", "OC/AEROPS")
+                Lancamentos.Add("201", "Depósitos")
+                Lancamentos.Add("202", "Líquido de Cobrança")
+                Lancamentos.Add("203", "Devolução de Cheques")
+                Lancamentos.Add("204", "Estornos")
+                Lancamentos.Add("205", "Lançamento Avisado.")
+                Lancamentos.Add("206", "Resgate de Aplicação")
+                Lancamentos.Add("207", "Empréstimo/Financiamento")
+                Lancamentos.Add("208", "Câmbio .")
+                Lancamentos.Add("209", "DOC Recebido .")
+                Lancamentos.Add("210", "Ações .")
+                Lancamentos.Add("211", "Dividendos.")
+                Lancamentos.Add("212", "Seguro.")
+                Lancamentos.Add("213", "Transferência entre Contas")
+                Lancamentos.Add("214", "Depósitos Especiais")
+                Lancamentos.Add("225", "Devolução da Compensação")
+                Lancamentos.Add("216", "OCT")
+
+            Catch ex As Exception
+                Throw
+            End Try
+        End Sub
+
+    End Class
+
 End Class
+
+Public Enum TipoServicoCNAB240
+    Nenhum = 0
+    Cobranca = 1
+    CobrancaSemPapel = 2
+    BloquetoEletronico = 3
+    ConciliacaoBancaria = 4
+    Debitos = 5
+    PagamentoDividendos = 10
+    PagamentoFornecedor = 20
+    PagamentoSalarios = 30
+    PagamentoSinistrosSegurados = 50
+    PagamentoDespesasViajanteEmTransito = 60
+    PagamentoAutorizado = 70
+    PagamentoCredenciados = 75
+    PagamentoRepresentantes_VendedoresAutorizados = 80
+    PagamentoBeneficios = 90
+    PagamentoDiversos = 98
+End Enum
