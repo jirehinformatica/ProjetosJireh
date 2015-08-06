@@ -26,9 +26,16 @@
                     ExeLote(I)
                 End If
 
+                'Buscando Seg E (posição 8 = 3) e (posição 14 = E)
+                If Ler(I, 8, 1) = "3" AndAlso Ler(I, 14, 1).ToUpper = "E" Then
+                    ExeSegE(I)
+                End If
+
                 'Buscando Trailer de lote (posição 8 = 5)
                 If Ler(I, 8, 1) = "5" Then
+                    ExeTrailerLote(I)
                     HeaderLote.Add(HeaderLoteAtual)
+                    HeaderLoteAtual = Nothing
                 End If
 
             Next
@@ -149,6 +156,139 @@
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Segmento E
+    ''' </summary>
+    Private Sub ExeSegE(ByVal Linha As Long)
+        Try
+            If Not ArquivoValidoValue OrElse HeaderLoteAtual Is Nothing Then
+                Exit Sub
+            End If
+
+            Dim Item As New tpItemExtrato(ArquivoValidoValue)
+            With Item
+
+                If Not HeaderArquivo.Ocorrencia.Sucesso Then
+                    Exit Sub
+                End If
+
+                '01.3   CÓDIGO DO BANCO NA COMPENSAÇÃO	1	3	3	-	NUMÉRICO '104'
+                .CodigoBancoArquivo = Ler(Linha, 1, 3).ToInteger(0)
+                '02.3   LOTE DE SERVIÇO	4	7	4	-	NUMÉRICO
+                .LoteServico = Ler(Linha, 4, 4)
+                '04.3   N.º DO REGISTRO	N.º SEQUENCIAL DO REGISTRO NO LOTE	9	13	5	-	NUMÉRICO	10
+                .NumeroSequencia = Ler(Linha, 9, 5).ToInteger(0)
+                '07.3   TIPO DE INSCRIÇÃO DA EMPRESA	18	18	1	-	NUMÉRICO	30
+                .TipoInscricao = Ler(Linha, 18, 1).ToInteger(1)
+                '08.3	NÚMERO	N.º DE INSCRIÇÃO DA EMPRESA	19	32	14	-	NUMÉRICO	30
+                .NumeroInscricao = Ler(Linha, 19, 14)
+                '09.3   CÓDIGO DO CONVÊNIO NO BANCO	33	52	20	-	ALFANUMÉRICO	7
+                .CodigoConvenio = Ler(Linha, 33, 20)
+                '10.3	CÓDIGO	AGÊNCIA MANTENEDORA DA CONTA (AAAA)	53	57	5	-	NUMÉRICO	8
+                .ContaCorrenteAgencia = Ler(Linha, 53, 5)
+                '11.3	DÍGITO VERIFICADOR DA AGÊNCIA (Módulo 11)	58	58	1	-	NUMÉRICO	8
+                .ContaCorrenteAgenciaDv = Ler(Linha, 58, 1)
+                '12.3	NÚMERO	NÚMERO DA CONTA CORRENTE (0000CCCCCCCC)	59	70	12	-	NUMÉRICO	8
+                .ContaCorrenteNumero = Ler(Linha, 59, 12)
+                '13.3	DV	DÍGITO VERIFICADOR DA CONTA (Módulo 11)	71	71	1	-	NUMÉRICO	8
+                .ContaCorrenteNumeroDv = Ler(Linha, 71, 1)
+                '15.3	NOME DA EMPRESA	73	102	30	-	ALFANUMÉRICO
+                .NomeEmpresa = Ler(Linha, 73, 30)
+
+                '17.3   TIPO DO COMPLEMENTO DO LANÇAMENTO	112	113	2	-	NUMÉRICO	63
+                .TipoComplemento = Ler(Linha, 112, 2)
+                '18.3   COMPLEMENTO DO LANÇAMENTO	114	133	20	-	ALFANUMÉRICO	63
+                .ComplementoTipoLancamento = Ler(Linha, 114, 20)
+                '19.3   IDENTIFICAÇÃO DE ISENÇÃO DA CPMF	134	134	1	-	S=ISENTO N=NÃO ISENTO
+                .CPMF = Ler(Linha, 134, 1)
+                '20.3   DATA CONTÁBIL	135	142	8	-	NUMÉRICO (DDMMAAAA)
+                .DataContabil = Ler(Linha, 135, 8).ToDateTimeConvert("ddMMyyyy")
+
+                '21.3   DATA DO LANÇAMENTO	143	150	8	-	NUMÉRICO (DDMMAAAA)
+                .DataLancamento = Ler(Linha, 143, 8).ToDateTimeConvert("ddMMyyyy")
+                '22.3   VALOR DO LANÇAMENTO	151	168	16	2	NUMÉRICO
+                .ValorLancamento = Ler(Linha, 151, 18).ToDecimal100
+                '23.3   TIPO DO LANCTO: VALOR A DEB/CRED	169	169	1	-	'D'-DÉBITO 'C'=CRÉDITO	49
+                .TipoLancamento = Ler(Linha, 169, 1)
+                '24.3   CATEGORIA DO LANÇAMENTO	170	172	3	-	NUMÉRICO	15
+                .Categoria = CategoriaLancamento.GetCategoriaLancamento(Ler(Linha, 170, 3))
+                '25.3   CÓDIGO DO LANÇAMENTO NO BANCO	173	176	4	-	ALFANUMÉRICO
+                .CodigoHistorico = Ler(Linha, 173, 4)
+                '26.3   DESCRIÇÃO DO HISTÓRICO DO LANCTO NO BANCO	177	201	25	-	ALFANUMÉRICO
+                .DescricaoHistorico = Ler(Linha, 177, 25)
+                '27.3   N° DOC/COMPLEMENTO	202	240	39	-	ALFANUMÉRICO	62
+                .NumeroDocumento = Ler(Linha, 202, 39)
+
+            End With
+
+            HeaderLoteAtual.SegmentoE.Add(Item)
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Trailer do lote
+    ''' </summary>
+    Private Sub ExeTrailerLote(ByVal Linha As Long)
+        Try
+            If Not ArquivoValidoValue Then
+                Exit Sub
+            End If
+
+            With HeaderLoteAtual.TrailerLote
+
+                If Not HeaderArquivo.Ocorrencia.Sucesso Then
+                    Exit Sub
+                End If
+                '01.1	BANCO	CÓDIGO DO BANCO NA COMPENSAÇÃO	1	3	3	
+                .CodigoBancoArquivo = Ler(Linha, 1, 3).ToInteger(0)
+                '02.1	LOTE	LOTE DE SERVIÇO	4	7	4	-	NUMÉRICO
+                .LoteServico = Ler(Linha, 4, 4)
+                '09.1	Inscrição	TIPO	TIPO DE INSCRIÇÃO DA EMPRESA	18	18	1	-	NUMÉRICO	30
+                .TipoInscricao = Ler(Linha, 18, 1).ToInteger(1)
+                '10.1	NÚMERO	N.º DE INSCRIÇÃO DA EMPRESA	19	32	14	-	NUMÉRICO	30
+                .NumeroInscricao = Ler(Linha, 19, 14)
+                '11.1	CÓDIGO DO CONVÊNIO NO BANCO (AAAAOOOCCCCCCCCD)	33	52	20	-	NUMÉRICO	7
+                .CodigoConvenio = Ler(Linha, 33, 20)
+                '12.1	CÓDIGO	AGÊNCIA MANTENEDORA DA CONTA (AAAA)	53	57	5	-	NUMÉRICO	8
+                .ContaCorrenteAgencia = Ler(Linha, 53, 5)
+                '13.1	DÍGITO VERIFICADOR DA AGÊNCIA (Módulo 11)	58	58	1	-	NUMÉRICO	8
+                .ContaCorrenteAgenciaDv = Ler(Linha, 58, 1)
+                '14.1	NÚMERO	NÚMERO DA CONTA CORRENTE (0000CCCCCCCC)	59	70	12	-	NUMÉRICO	8
+                .ContaCorrenteNumero = Ler(Linha, 59, 12)
+                '15.1	DV	DÍGITO VERIFICADOR DA CONTA (Módulo 11)	71	71	1	-	NUMÉRICO	8
+                .ContaCorrenteNumeroDv = Ler(Linha, 71, 1)
+
+                '14.5	VALORES	BLOQUEADO > 24H	SALDO BLOQUEADO ACIMA 24 H	89	106	16	-	NUMÉRICO
+                .SaldoBloqueado24 = Ler(Linha, 89, 18).ToDecimal100
+                '15.5	LIMITE DA CONTA	107	124	16	2	NUMÉRICO
+                .LimiteConta = Ler(Linha, 107, 18).ToDecimal100
+                '16.5	BLOQUEADO 24 H	SALDO BLOQUEADO	125	142	16	2	NUMÉRICO
+                .SaldoBloqueado = Ler(Linha, 125, 18).ToDecimal100
+                '17.5	DATA DO SALDO FINAL	143	150	8	-	NUMÉRICO (DDMMAAAA)
+                .DataSaldoFinal = Ler(Linha, 143, 8).ToDateTimeConvert("ddMMyyyy")
+                '18.5	VALOR DO SALDO FINAL	151	168	16	2	NUMÉRICO
+                .ValorSaldoFinal = Ler(Linha, 151, 18).ToDecimal100
+                '19.5	SITUAÇÃO DO SALDO FINAL	169	169	1	-	'D'=DEVEDOR 'C'=CREDOR
+                .SituacaoDC = Ler(Linha, 169, 1)
+                '20.5	POSIÇÃO DO SALDO FINAL	170	170	1	-	'P'=PARCIAL 'F'=FINAL
+                .StatusPF = Ler(Linha, 170, 1)
+                '21.5	QUANTTDADE DE REGISTROS DO LOTE	171	176	6	-	NUMÉRICO (REG. TIPOS=1.3.5)
+                .TotalRegistros = Ler(Linha, 171, 6).ToInteger
+                '22.5	SOMATÓRIA DOS VALORES A CRÉDITO	177	194	16	2	NUMÉRICO (REG. TIPO=3, SEG=E)
+                .TotalDebito = Ler(Linha, 177, 18).ToDecimal100
+                '23.5	SOMATÓRIA DOS VALORES A CRÉDITO	195	212	16	2	NUMÉRICO (REG. TIPO=3, SEG=E)
+                .TotalCredito = Ler(Linha, 195, 18).ToDecimal100
+
+            End With
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
 #Region "PROPRIEDADES HEADER ARQUIVO"
 
     Public Property HeaderArquivo As tpHeaderArquivo
@@ -209,6 +349,7 @@
         Public Sub New(ByVal ArquivoValido As Boolean)
             ArquivoValidoValue = ArquivoValido
             SegmentoE = New List(Of tpItemExtrato)
+            TrailerLote = New TpTrailerLote(ArquivoValido)
         End Sub
 
         Public Property OperacaoDCE As String
@@ -280,6 +421,8 @@
         End Property
 
         Public SegmentoE As List(Of tpItemExtrato)
+
+        Public TrailerLote As TpTrailerLote
 
     End Class
 
@@ -489,14 +632,25 @@
                 Return False
             End If
 
-            Dim Existe As Integer = (From i In NumeroConvenios.Split(";").AsEnumerable Where i.Trim = HeaderLoteAtual.CodigoConvenio.Trim).ToList.Count
+            Dim Existe As Integer = (From i In NumeroConvenios.Split(";").AsEnumerable Where i.Trim = HeaderArquivo.CodigoConvenio.Trim).ToList.Count
             ArquivoValidoValue = Existe > 0
-
             If Not ArquivoValidoValue Then
                 Dim aux As Boolean = False
                 Eventos.OnMensagem("Convênio não autorizado para leitura do arquivo. Entre em contato com o suporte.", aux)
                 Return False
             End If
+
+            Dim Query As List(Of tpHeaderLote) = (From i In HeaderLote.AsEnumerable _
+                                                  Where i.CodigoConvenio.Equals((From x In NumeroConvenios.Split(";").AsEnumerable _
+                                                                                 Where x.Trim = i.CodigoConvenio).FirstOrDefault)).ToList
+
+            If Query.Count = 0 Then
+                Eventos.OnMensagem("Não existe nenhum extrato para os convênios autorizados dentro do arquivo informado.", False)
+                Return False
+            End If
+
+            HeaderLote = Query
+
             Return ArquivoValidoValue
         Catch ex As Exception
             Throw

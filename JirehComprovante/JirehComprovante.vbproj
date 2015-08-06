@@ -110,6 +110,12 @@
     <Compile Include="Comprovante.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Extrato.Designer.vb">
+      <DependentUpon>Extrato.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Extrato.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MdiComprovante.Designer.vb">
       <DependentUpon>MdiComprovante.vb</DependentUpon>
     </Compile>
@@ -151,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comprovante.resx">
       <DependentUpon>Comprovante.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Extrato.resx">
+      <DependentUpon>Extrato.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MdiComprovante.resx">
       <DependentUpon>MdiComprovante.vb</DependentUpon>
