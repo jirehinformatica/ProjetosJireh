@@ -6,8 +6,9 @@
         Try
             HeaderArquivo = New tpHeaderArquivo
             HeaderLote = New List(Of tpHeaderLote)
-            'ItensArquivo = New List(Of tpItemArquivo)
-            'Dim Item As tpItemArquivo = Nothing
+
+            Eventos.OnProgresso(0, "Iniciando a leitura do arquivo", LinhasCount)
+
             For I As Long = 0 To LinhasCount - 1
 
                 If Eventos.Cancelado Then
@@ -39,8 +40,6 @@
                 End If
 
             Next
-
-            Eventos.OnProgresso(0, "Iniciando a leitura do arquivo", LinhasCount)
 
         Catch ex As Exception
             Throw
@@ -632,7 +631,7 @@
                 Return False
             End If
 
-            Dim Existe As Integer = (From i In NumeroConvenios.Split(";").AsEnumerable Where i.Trim = HeaderArquivo.CodigoConvenio.Trim).ToList.Count
+            Dim Existe As Integer = (From i In NumeroConvenios.Split(";").AsEnumerable Where TesteConvenio(i.Trim, HeaderArquivo.CodigoConvenio.Trim, 20)).ToList.Count
             ArquivoValidoValue = Existe > 0
             If Not ArquivoValidoValue Then
                 Dim aux As Boolean = False
@@ -641,8 +640,8 @@
             End If
 
             Dim Query As List(Of tpHeaderLote) = (From i In HeaderLote.AsEnumerable _
-                                                  Where i.CodigoConvenio.Equals((From x In NumeroConvenios.Split(";").AsEnumerable _
-                                                                                 Where x.Trim = i.CodigoConvenio).FirstOrDefault)).ToList
+                                                  Where TesteConvenio(i.CodigoConvenio, ((From x In NumeroConvenios.Split(";").AsEnumerable _
+                                                                                 Where TesteConvenio(x.Trim, i.CodigoConvenio, 20)).FirstOrDefault), 20)).ToList
 
             If Query.Count = 0 Then
                 Eventos.OnMensagem("Não existe nenhum extrato para os convênios autorizados dentro do arquivo informado.", False)

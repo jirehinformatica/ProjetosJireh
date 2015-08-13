@@ -75,8 +75,8 @@ Public Class TratarErros
             Em.Assunto = "Erro - Transmissão de erros do sistema (Projetos Jireh)"
             Em.MensagemTextoPossuiHTML = True
             Em.MensagemPrioridade = Net.Mail.MailPriority.Normal
-            Em.EnviarServidorEmail = "email-ssl.com.br"
-            Em.EnviarServidorPorta = 465
+            Em.EnviarServidorEmail = "mail.jireh.com.br"
+            Em.EnviarServidorPorta = 587
             Em.DestinatarioEmailAdd("sistemas@jireh.net.br")
             Em.RemetenteEmail("sistemas@jireh.net.br", "Sistema Jireh")
             Em.EnviarUsuarioSenhaAdd("sistemas@jireh.net.br", "jirehsis01")

@@ -3,7 +3,15 @@
     Private OcorrenciaValidaValue As String
     Private Function ValidaOcorrencia(ByVal Valor As String) As Boolean
         Try
-            Return Valor.IndexOf(OcorrenciaValidaValue) > 0
+            Dim achou As Boolean = False
+            Dim aux() As String = OcorrenciaValidaValue.Split("|")
+            For Each s As String In aux
+                If s.Trim = Valor.Trim Then
+                    achou = True
+                    Exit For
+                End If
+            Next
+            Return achou
         Catch ex As Exception
             Throw
         End Try
@@ -30,6 +38,11 @@
             End Select
 
             Dim aux As String
+
+            If ValidaOcorrencia(ColunaOcorrecia) Then
+                SucessoValue = True
+                Exit Sub
+            End If
 
             For ini As Integer = 0 To ColunaOcorrecia.Length - 1 Step 2
                 Select Case QuantidadeOcorrenciasValue
@@ -160,6 +173,7 @@
         Try
             TabelaOcorrencia = New Dictionary(Of String, String)
 
+            TabelaOcorrencia.Add("  ", "")
             TabelaOcorrencia.Add("01", "01 - Controle do registro header inválido")
             TabelaOcorrencia.Add("02", "02 - Código de remessa diferente de '1'")
             TabelaOcorrencia.Add("03", "03 - Data de geração inválida ou diferente de D+0")

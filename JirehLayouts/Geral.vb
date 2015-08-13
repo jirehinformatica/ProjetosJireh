@@ -138,6 +138,32 @@ Public Module Geral
         End Try
     End Function
 
+    Public Function TesteConvenio(ByVal ValorInformado As String, ByVal Compare As String, ByVal tamanho As Integer) As Boolean
+        Try
+            If ValorInformado Is Nothing OrElse Compare Is Nothing Then
+                Return False
+            End If
+
+            If IsNumeric(ValorInformado) AndAlso IsNumeric(Compare) Then
+                If Compare.ToDouble = ValorInformado.ToDouble Then
+                    Return True
+                Else
+                    Return False
+                End If
+            End If
+
+            Dim a1 As String = ValorInformado.PadLeft(tamanho, "0")
+            Dim a2 As String = Compare.PadLeft(tamanho, "0")
+            If a1 = a2 Then
+                Return True
+            Else
+                Return False
+            End If
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
 
     Public Function ParaString(ByVal Valor As Object) As String
         Dim aux As String

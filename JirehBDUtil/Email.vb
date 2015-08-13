@@ -32,6 +32,7 @@ Public Class Email
         Else
             oRemetente = New MailAddress(Email, Display, Encoding.GetEncoding("ISO-8859-1"))
         End If
+        oEmail.From = oRemetente
     End Sub
 
     ''' <summary>

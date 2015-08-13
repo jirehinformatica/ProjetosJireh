@@ -125,4 +125,13 @@
             TratarErros(ex)
         End Try
     End Sub
+
+    Private Sub tsbExtrato_Click(sender As Object, e As EventArgs) Handles tsbExtrato.Click, ExtratoToolStripMenuItem.Click
+        Try
+            Dim F As New Extrato
+            FormOpenMDI(F)
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
 End Class

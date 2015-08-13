@@ -121,6 +121,9 @@
   <data name="Impressora24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Impressora24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Sair16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sair16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sep24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sep24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,6 +136,9 @@
   <data name="Open24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Open24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Extrato24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Extrato24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="cancelar24x24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cancelar24x24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,7 +148,7 @@
   <data name="comprovante16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\comprovante16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Sair16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sair16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Extrato16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Extrato16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
