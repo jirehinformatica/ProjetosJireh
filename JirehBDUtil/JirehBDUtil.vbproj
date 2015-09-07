@@ -75,6 +75,8 @@
     <Compile Include="BD\Dal_MaquinasAtivasItens.vb" />
     <Compile Include="BD\Dal_SerialEmpresas.vb" />
     <Compile Include="BD\Dal_SerialHd.vb" />
+    <Compile Include="BD\Dal_Telas.vb" />
+    <Compile Include="BD\Dal_TelasEmpresas.vb" />
     <Compile Include="ChaveExecucao.vb" />
     <Compile Include="CriptografiaSistema.vb" />
     <Compile Include="Email.vb" />

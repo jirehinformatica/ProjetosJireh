@@ -35,6 +35,13 @@ Partial Class TelaPrincipal
         Me.rbInativo = New System.Windows.Forms.RadioButton()
         Me.rbAtivo = New System.Windows.Forms.RadioButton()
         Me.tpConvenios = New System.Windows.Forms.TabPage()
+        Me.lbConvenios = New System.Windows.Forms.ListBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnExcluirConvenio = New System.Windows.Forms.Button()
+        Me.btnAtivoConvenio = New System.Windows.Forms.Button()
+        Me.btnIncluirConvenio = New System.Windows.Forms.Button()
+        Me.txtNumConvenio = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.tpNovoEmpresa = New System.Windows.Forms.TabPage()
         Me.btnExcluirEmpresa = New System.Windows.Forms.Button()
         Me.btnAtualizarEmpresa = New System.Windows.Forms.Button()
@@ -54,20 +61,21 @@ Partial Class TelaPrincipal
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lbEmpresas = New System.Windows.Forms.ListBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtNumConvenio = New System.Windows.Forms.TextBox()
-        Me.btnIncluirConvenio = New System.Windows.Forms.Button()
-        Me.btnAtivoConvenio = New System.Windows.Forms.Button()
-        Me.btnExcluirConvenio = New System.Windows.Forms.Button()
-        Me.lbConvenios = New System.Windows.Forms.ListBox()
+        Me.tpTelas = New System.Windows.Forms.TabPage()
+        Me.lsbTelas = New System.Windows.Forms.ListBox()
+        Me.lsbTelasLiberadas = New System.Windows.Forms.ListBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnTelaAdd = New System.Windows.Forms.Button()
+        Me.btnTelaRemove = New System.Windows.Forms.Button()
         Me.tbGeral.SuspendLayout()
         Me.tpGeral.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.txtQuantidade, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tpConvenios.SuspendLayout()
-        Me.tpNovoEmpresa.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.tpNovoEmpresa.SuspendLayout()
+        Me.tpTelas.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbGeral
@@ -75,6 +83,7 @@ Partial Class TelaPrincipal
         Me.tbGeral.Controls.Add(Me.tpGeral)
         Me.tbGeral.Controls.Add(Me.tpConvenios)
         Me.tbGeral.Controls.Add(Me.tpNovoEmpresa)
+        Me.tbGeral.Controls.Add(Me.tpTelas)
         Me.tbGeral.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.tbGeral.Location = New System.Drawing.Point(0, 163)
         Me.tbGeral.Name = "tbGeral"
@@ -202,6 +211,76 @@ Partial Class TelaPrincipal
         Me.tpConvenios.TabIndex = 1
         Me.tpConvenios.Text = "Convênios"
         Me.tpConvenios.UseVisualStyleBackColor = True
+        '
+        'lbConvenios
+        '
+        Me.lbConvenios.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lbConvenios.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbConvenios.FormattingEnabled = True
+        Me.lbConvenios.ItemHeight = 14
+        Me.lbConvenios.Location = New System.Drawing.Point(3, 56)
+        Me.lbConvenios.Name = "lbConvenios"
+        Me.lbConvenios.Size = New System.Drawing.Size(604, 193)
+        Me.lbConvenios.TabIndex = 1
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.btnExcluirConvenio)
+        Me.GroupBox2.Controls.Add(Me.btnAtivoConvenio)
+        Me.GroupBox2.Controls.Add(Me.btnIncluirConvenio)
+        Me.GroupBox2.Controls.Add(Me.txtNumConvenio)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(604, 53)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Incluir novo convênio"
+        '
+        'btnExcluirConvenio
+        '
+        Me.btnExcluirConvenio.Location = New System.Drawing.Point(514, 17)
+        Me.btnExcluirConvenio.Name = "btnExcluirConvenio"
+        Me.btnExcluirConvenio.Size = New System.Drawing.Size(75, 23)
+        Me.btnExcluirConvenio.TabIndex = 5
+        Me.btnExcluirConvenio.Text = "Excluir"
+        Me.btnExcluirConvenio.UseVisualStyleBackColor = True
+        '
+        'btnAtivoConvenio
+        '
+        Me.btnAtivoConvenio.Location = New System.Drawing.Point(352, 17)
+        Me.btnAtivoConvenio.Name = "btnAtivoConvenio"
+        Me.btnAtivoConvenio.Size = New System.Drawing.Size(87, 23)
+        Me.btnAtivoConvenio.TabIndex = 4
+        Me.btnAtivoConvenio.Text = "Mudar Status"
+        Me.btnAtivoConvenio.UseVisualStyleBackColor = True
+        '
+        'btnIncluirConvenio
+        '
+        Me.btnIncluirConvenio.Location = New System.Drawing.Point(212, 17)
+        Me.btnIncluirConvenio.Name = "btnIncluirConvenio"
+        Me.btnIncluirConvenio.Size = New System.Drawing.Size(75, 23)
+        Me.btnIncluirConvenio.TabIndex = 3
+        Me.btnIncluirConvenio.Text = "Incluir"
+        Me.btnIncluirConvenio.UseVisualStyleBackColor = True
+        '
+        'txtNumConvenio
+        '
+        Me.txtNumConvenio.Location = New System.Drawing.Point(65, 19)
+        Me.txtNumConvenio.MaxLength = 20
+        Me.txtNumConvenio.Name = "txtNumConvenio"
+        Me.txtNumConvenio.Size = New System.Drawing.Size(131, 20)
+        Me.txtNumConvenio.TabIndex = 2
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(15, 22)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(44, 13)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "Número"
         '
         'tpNovoEmpresa
         '
@@ -394,75 +473,73 @@ Partial Class TelaPrincipal
         Me.lbEmpresas.Size = New System.Drawing.Size(618, 140)
         Me.lbEmpresas.TabIndex = 2
         '
-        'GroupBox2
+        'tpTelas
         '
-        Me.GroupBox2.Controls.Add(Me.btnExcluirConvenio)
-        Me.GroupBox2.Controls.Add(Me.btnAtivoConvenio)
-        Me.GroupBox2.Controls.Add(Me.btnIncluirConvenio)
-        Me.GroupBox2.Controls.Add(Me.txtNumConvenio)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 3)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(604, 53)
-        Me.GroupBox2.TabIndex = 0
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Incluir novo convênio"
+        Me.tpTelas.Controls.Add(Me.btnTelaRemove)
+        Me.tpTelas.Controls.Add(Me.btnTelaAdd)
+        Me.tpTelas.Controls.Add(Me.Label11)
+        Me.tpTelas.Controls.Add(Me.Label10)
+        Me.tpTelas.Controls.Add(Me.lsbTelasLiberadas)
+        Me.tpTelas.Controls.Add(Me.lsbTelas)
+        Me.tpTelas.Location = New System.Drawing.Point(4, 22)
+        Me.tpTelas.Name = "tpTelas"
+        Me.tpTelas.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpTelas.Size = New System.Drawing.Size(610, 252)
+        Me.tpTelas.TabIndex = 3
+        Me.tpTelas.Text = "Telas/Programas"
+        Me.tpTelas.UseVisualStyleBackColor = True
         '
-        'Label3
+        'lsbTelas
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 22)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(44, 13)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Número"
+        Me.lsbTelas.FormattingEnabled = True
+        Me.lsbTelas.Location = New System.Drawing.Point(8, 28)
+        Me.lsbTelas.Name = "lsbTelas"
+        Me.lsbTelas.Size = New System.Drawing.Size(280, 212)
+        Me.lsbTelas.TabIndex = 0
         '
-        'txtNumConvenio
+        'lsbTelasLiberadas
         '
-        Me.txtNumConvenio.Location = New System.Drawing.Point(65, 19)
-        Me.txtNumConvenio.MaxLength = 20
-        Me.txtNumConvenio.Name = "txtNumConvenio"
-        Me.txtNumConvenio.Size = New System.Drawing.Size(131, 20)
-        Me.txtNumConvenio.TabIndex = 2
+        Me.lsbTelasLiberadas.FormattingEnabled = True
+        Me.lsbTelasLiberadas.Location = New System.Drawing.Point(322, 28)
+        Me.lsbTelasLiberadas.Name = "lsbTelasLiberadas"
+        Me.lsbTelasLiberadas.Size = New System.Drawing.Size(280, 212)
+        Me.lsbTelasLiberadas.TabIndex = 1
         '
-        'btnIncluirConvenio
+        'Label10
         '
-        Me.btnIncluirConvenio.Location = New System.Drawing.Point(212, 17)
-        Me.btnIncluirConvenio.Name = "btnIncluirConvenio"
-        Me.btnIncluirConvenio.Size = New System.Drawing.Size(75, 23)
-        Me.btnIncluirConvenio.TabIndex = 3
-        Me.btnIncluirConvenio.Text = "Incluir"
-        Me.btnIncluirConvenio.UseVisualStyleBackColor = True
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(8, 12)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(142, 13)
+        Me.Label10.TabIndex = 2
+        Me.Label10.Text = "Telas que existe no sistemas"
         '
-        'btnAtivoConvenio
+        'Label11
         '
-        Me.btnAtivoConvenio.Location = New System.Drawing.Point(352, 17)
-        Me.btnAtivoConvenio.Name = "btnAtivoConvenio"
-        Me.btnAtivoConvenio.Size = New System.Drawing.Size(87, 23)
-        Me.btnAtivoConvenio.TabIndex = 4
-        Me.btnAtivoConvenio.Text = "Mudar Status"
-        Me.btnAtivoConvenio.UseVisualStyleBackColor = True
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(350, 11)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(216, 13)
+        Me.Label11.TabIndex = 3
+        Me.Label11.Text = "Telas que a empresa selecionada pode usar"
         '
-        'btnExcluirConvenio
+        'btnTelaAdd
         '
-        Me.btnExcluirConvenio.Location = New System.Drawing.Point(514, 17)
-        Me.btnExcluirConvenio.Name = "btnExcluirConvenio"
-        Me.btnExcluirConvenio.Size = New System.Drawing.Size(75, 23)
-        Me.btnExcluirConvenio.TabIndex = 5
-        Me.btnExcluirConvenio.Text = "Excluir"
-        Me.btnExcluirConvenio.UseVisualStyleBackColor = True
+        Me.btnTelaAdd.Location = New System.Drawing.Point(292, 104)
+        Me.btnTelaAdd.Name = "btnTelaAdd"
+        Me.btnTelaAdd.Size = New System.Drawing.Size(27, 23)
+        Me.btnTelaAdd.TabIndex = 4
+        Me.btnTelaAdd.Text = ">>"
+        Me.btnTelaAdd.UseVisualStyleBackColor = True
         '
-        'lbConvenios
+        'btnTelaRemove
         '
-        Me.lbConvenios.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lbConvenios.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbConvenios.FormattingEnabled = True
-        Me.lbConvenios.ItemHeight = 14
-        Me.lbConvenios.Location = New System.Drawing.Point(3, 56)
-        Me.lbConvenios.Name = "lbConvenios"
-        Me.lbConvenios.Size = New System.Drawing.Size(604, 193)
-        Me.lbConvenios.TabIndex = 1
+        Me.btnTelaRemove.Location = New System.Drawing.Point(292, 133)
+        Me.btnTelaRemove.Name = "btnTelaRemove"
+        Me.btnTelaRemove.Size = New System.Drawing.Size(27, 23)
+        Me.btnTelaRemove.TabIndex = 5
+        Me.btnTelaRemove.Text = "<<"
+        Me.btnTelaRemove.UseVisualStyleBackColor = True
         '
         'TelaPrincipal
         '
@@ -483,10 +560,12 @@ Partial Class TelaPrincipal
         Me.GroupBox1.ResumeLayout(False)
         CType(Me.txtQuantidade, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tpConvenios.ResumeLayout(False)
-        Me.tpNovoEmpresa.ResumeLayout(False)
-        Me.tpNovoEmpresa.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        Me.tpNovoEmpresa.ResumeLayout(False)
+        Me.tpNovoEmpresa.PerformLayout()
+        Me.tpTelas.ResumeLayout(False)
+        Me.tpTelas.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -528,5 +607,12 @@ Partial Class TelaPrincipal
     Friend WithEvents btnIncluirConvenio As System.Windows.Forms.Button
     Friend WithEvents txtNumConvenio As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents tpTelas As System.Windows.Forms.TabPage
+    Friend WithEvents btnTelaRemove As System.Windows.Forms.Button
+    Friend WithEvents btnTelaAdd As System.Windows.Forms.Button
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents lsbTelasLiberadas As System.Windows.Forms.ListBox
+    Friend WithEvents lsbTelas As System.Windows.Forms.ListBox
 
 End Class

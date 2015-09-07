@@ -1,11 +1,25 @@
 ﻿Public Class MdiComprovante
 
+    Private Sub SetVisibleMenuItem(ByVal Nome As String, ByVal Valor As Boolean)
+        Try
+            For Each i As ToolStripDropDownItem In DirectCast(msMenu.Items(0), ToolStripDropDownItem).DropDownItems
+                If i.Name = Nome Then
+                    i.Visible = Valor
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
     Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
+
     End Sub
 
     Private Function Semana(ByVal value As Integer) As String
@@ -130,6 +144,43 @@
         Try
             Dim F As New Extrato
             FormOpenMDI(F)
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Sub MdiComprovante_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Try
+            '****************************************************************
+            '   Para adicionar uma nova tela na configuração, deve acrescentar no choose o nome do menu item e atalho
+            '   Acrescentar na quantidade telas do sistemas + 1
+            '   OBSERVAÇÃO: Toda nova tela representa um numero. Ex: 1 = Comprovante, 2 = extrato
+
+            Dim QuantidadeTelasSistema As Integer = 2
+
+            Dim DeParaAtalho As New Dictionary(Of Integer, String)
+            Dim DeParaMenu As New Dictionary(Of Integer, String)
+
+            For i As Integer = 1 To QuantidadeTelasSistema
+
+                Dim nome As String = Choose(i, "tsbComprovante", "tsbExtrato")
+                DeParaAtalho.Add(i, nome)
+
+                nome = Choose(i, "ComprovanteToolStripMenuItem", "ExtratoToolStripMenuItem")
+                DeParaMenu.Add(i, nome)
+
+                tsAtalho.Items(DeParaAtalho(i)).Visible = False
+                SetVisibleMenuItem(DeParaMenu(i), False)
+            Next
+
+            Dim GerTela As New JirehBDUtil.Dal_TelasEmpresas(JirehBDUtil.CnMySQL)
+            Dim tb As DataTable = GerTela.Consultar(JirehBDUtil.InfoRegistro.InformacoesServidor.Cnpj_emp)
+
+            For Each row As DataRow In tb.Rows
+                tsAtalho.Items(DeParaAtalho(row(JirehBDUtil.Dal_TelasEmpresas.TelasEmpresasColunmsName.CodigoTel_tle))).Visible = True
+                SetVisibleMenuItem(DeParaMenu(row(JirehBDUtil.Dal_TelasEmpresas.TelasEmpresasColunmsName.CodigoTel_tle)), True)
+            Next
+
         Catch ex As Exception
             TratarErros(ex)
         End Try

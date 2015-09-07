@@ -137,6 +137,61 @@ Public Class TelaPrincipal
 
 #End Region
 
+#Region "Telas, classe e seleção"
+
+    Private Sub CarregarTelas()
+        Try
+            Dim GerTelas As New Dal_Telas(CnMySQL)
+            Dim tb As DataTable = GerTelas.Consultar
+
+            lsbTelas.Items.Clear()
+            For Each row As DataRow In tb.Rows
+                lsbTelas.Items.Add(row(Dal_Telas.TelasColunmsName.Codigo_tla).ToString & " - " & row(Dal_Telas.TelasColunmsName.Descricao_tla).ToString)
+            Next
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Private Sub CarregarTelasDaEmpresa(ByVal Cnpj As String)
+        Try
+            Dim GerTelasEmp As New Dal_TelasEmpresas(CnMySQL)
+            Dim tb As DataTable = GerTelasEmp.Consultar(Cnpj)
+
+            lsbTelasLiberadas.Items.Clear()
+            For Each row As DataRow In tb.Rows
+                lsbTelasLiberadas.Items.Add(row(Dal_Telas.TelasColunmsName.Codigo_tla).ToString & " - " & row(Dal_Telas.TelasColunmsName.Descricao_tla).ToString)
+            Next
+
+            LimparTelasJaSelecionadas(lsbTelas, lsbTelasLiberadas)
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Private Sub LimparTelasJaSelecionadas(ByRef QualGridLimpa As ListBox, ByRef QualGridRef As ListBox)
+        Try
+            Dim aux As New List(Of String)
+            For Each i As String In QualGridRef.Items
+                For c As Integer = 0 To QualGridLimpa.Items.Count - 1
+                    If i = QualGridLimpa.Items(c) Then
+                        aux.Add(QualGridLimpa.Items(c))
+                    End If
+                Next
+            Next
+            For Each p As String In aux
+                QualGridLimpa.Items.Remove(p)
+            Next
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+#End Region
+
     Private Function GetEmpresa() As String
         Try
             Dim aux As Object
@@ -149,6 +204,18 @@ Public Class TelaPrincipal
             aux2 = aux2.Replace("_", "")
             HabilitarControles(True)
             Return aux2.Trim
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Private Function GetTela(ByVal Item As String) As Integer
+        Try
+            If Item Is Nothing OrElse String.IsNullOrEmpty(Item) Then
+                Return -1
+            End If
+            Dim aux2 As String = Item.ToString.Split("-")(0)
+            Return aux2.ToInteger
         Catch ex As Exception
             Throw
         End Try
@@ -187,6 +254,8 @@ Public Class TelaPrincipal
         btnAtivoConvenio.Enabled = Value
         btnExcluirConvenio.Enabled = Value
         btnIncluirConvenio.Enabled = Value
+        btnTelaAdd.Enabled = Value
+        btnTelaRemove.Enabled = Value
     End Sub
 
     Private Sub TelaPrincipal_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -199,6 +268,7 @@ Public Class TelaPrincipal
             EmpresaSelecionada = Nothing
             GerEmpresas = New Dal_Empresas(CnMySQL)
             CarregarEmpresas()
+            'CarregarTelas()
             Carregando = False
             txtCadastro.Text = Date.Now.ToString("dd/MM/yyyy")
 
@@ -249,6 +319,8 @@ Public Class TelaPrincipal
 
             CarregarMaquinas(Item.Maquinas)
             CarregarConvenios(EmpresaSelecionada.Cnpj_emp)
+            CarregarTelas()
+            CarregarTelasDaEmpresa(EmpresaSelecionada.Cnpj_emp)
 
             Carregando = False
         Catch ex As Exception
@@ -615,6 +687,53 @@ Public Class TelaPrincipal
             Alerta("Convênio incluído com sucesso")
 
             HabilitarControles(True)
+
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Sub btnTelaAdd_Click(sender As Object, e As EventArgs) Handles btnTelaAdd.Click
+        Try
+            If lsbTelas.SelectedIndex < 0 Then
+                Exit Sub
+            End If
+
+            Dim p As String = lsbTelas.Items(lsbTelas.SelectedIndex)
+            lsbTelasLiberadas.Items.Add(p)
+
+            LimparTelasJaSelecionadas(lsbTelas, lsbTelasLiberadas)
+
+            Dim GerTela As New Dal_TelasEmpresas(CnMySQL)
+            Dim o As Integer = GetTela(p)
+            If o = -1 Then
+                Exit Sub
+            End If
+            GerTela.Inserir(EmpresaSelecionada.Cnpj_emp, o)
+
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Sub btnTelaRemove_Click(sender As Object, e As EventArgs) Handles btnTelaRemove.Click
+        Try
+
+            If lsbTelasLiberadas.SelectedIndex < 0 Then
+                Exit Sub
+            End If
+
+            Dim p As String = lsbTelasLiberadas.Items(lsbTelasLiberadas.SelectedIndex)
+            lsbTelas.Items.Add(p)
+
+            LimparTelasJaSelecionadas(lsbTelasLiberadas, lsbTelas)
+
+            Dim GerTela As New Dal_TelasEmpresas(CnMySQL)
+            Dim o As Integer = GetTela(p)
+            If o = -1 Then
+                Exit Sub
+            End If
+            GerTela.Excluir(EmpresaSelecionada.Cnpj_emp, o)
 
         Catch ex As Exception
             TratarErros(ex)

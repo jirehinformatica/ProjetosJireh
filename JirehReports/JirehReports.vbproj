@@ -71,6 +71,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsJireh.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ExtratoReport.vb" />
     <Compile Include="Geral.vb" />
     <Compile Include="IReports.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -96,6 +97,7 @@
     <EmbeddedResource Include="ComprovantePagamento.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Extrato.rdlc" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

@@ -22,8 +22,15 @@ Partial Class Extrato
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.tsMenu = New System.Windows.Forms.ToolStrip()
         Me.tsbAbrir = New System.Windows.Forms.ToolStripButton()
+        Me.tsbImprimir = New System.Windows.Forms.ToolStripButton()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.cboSequencia = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -56,7 +63,32 @@ Partial Class Extrato
         Me.txtDataInicio = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.dgvExtrato = New System.Windows.Forms.DataGridView()
-        Me.tsbImprimir = New System.Windows.Forms.ToolStripButton()
+        Me.DataLancamento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumeroDocumento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescricaoHistorico = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ValorLancamento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoLancamento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumeroSequencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AgenciaEContaCompleto = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CodigoBancoArquivo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LoteServico = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoInscricao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NumeroInscricao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CodigoConvenio = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoServico = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContaCorrenteAgencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContaCorrenteAgenciaDv = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContaCorrenteNumero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContaCorrenteNumeroDv = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NomeEmpresa = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CPMF = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataContabil = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoLancamentoDescricao = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Categoria = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CodigoHistorico = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TipoComplemento = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ComplementoBancoOrigem = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ComplementoAgenciaOrigem = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tsMenu.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -84,6 +116,18 @@ Partial Class Extrato
         Me.tsbAbrir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsbAbrir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         Me.tsbAbrir.ToolTipText = "Abrir arquivo extrato"
+        '
+        'tsbImprimir
+        '
+        Me.tsbImprimir.Image = Global.JirehComprovante.My.Resources.Resources.Impressora24x24
+        Me.tsbImprimir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.tsbImprimir.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbImprimir.Name = "tsbImprimir"
+        Me.tsbImprimir.Size = New System.Drawing.Size(57, 35)
+        Me.tsbImprimir.Text = "Imprimir"
+        Me.tsbImprimir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.tsbImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
+        Me.tsbImprimir.ToolTipText = "Imprimir extrato"
         '
         'Panel1
         '
@@ -382,24 +426,227 @@ Partial Class Extrato
         '
         'dgvExtrato
         '
-        Me.dgvExtrato.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvExtrato.AllowUserToAddRows = False
+        Me.dgvExtrato.AllowUserToDeleteRows = False
+        Me.dgvExtrato.AllowUserToResizeRows = False
+        Me.dgvExtrato.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvExtrato.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvExtrato.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.dgvExtrato.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataLancamento, Me.NumeroDocumento, Me.DescricaoHistorico, Me.ValorLancamento, Me.TipoLancamento, Me.NumeroSequencia, Me.AgenciaEContaCompleto, Me.CodigoBancoArquivo, Me.LoteServico, Me.TipoInscricao, Me.NumeroInscricao, Me.CodigoConvenio, Me.TipoServico, Me.ContaCorrenteAgencia, Me.ContaCorrenteAgenciaDv, Me.ContaCorrenteNumero, Me.ContaCorrenteNumeroDv, Me.NomeEmpresa, Me.CPMF, Me.DataContabil, Me.TipoLancamentoDescricao, Me.Categoria, Me.CodigoHistorico, Me.TipoComplemento, Me.ComplementoBancoOrigem, Me.ComplementoAgenciaOrigem})
         Me.dgvExtrato.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgvExtrato.Location = New System.Drawing.Point(0, 139)
+        Me.dgvExtrato.MultiSelect = False
         Me.dgvExtrato.Name = "dgvExtrato"
+        Me.dgvExtrato.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvExtrato.Size = New System.Drawing.Size(730, 285)
         Me.dgvExtrato.TabIndex = 13
         '
-        'tsbImprimir
+        'DataLancamento
         '
-        Me.tsbImprimir.Image = Global.JirehComprovante.My.Resources.Resources.Impressora24x24
-        Me.tsbImprimir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.tsbImprimir.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbImprimir.Name = "tsbImprimir"
-        Me.tsbImprimir.Size = New System.Drawing.Size(57, 35)
-        Me.tsbImprimir.Text = "Imprimir"
-        Me.tsbImprimir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.tsbImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-        Me.tsbImprimir.ToolTipText = "Imprimir extrato"
+        Me.DataLancamento.DataPropertyName = "DataLancamento"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.Format = "d"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.DataLancamento.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DataLancamento.HeaderText = "Lançamento"
+        Me.DataLancamento.Name = "DataLancamento"
+        Me.DataLancamento.ReadOnly = True
+        Me.DataLancamento.Width = 80
+        '
+        'NumeroDocumento
+        '
+        Me.NumeroDocumento.DataPropertyName = "NumeroDocumento"
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.NumeroDocumento.DefaultCellStyle = DataGridViewCellStyle3
+        Me.NumeroDocumento.HeaderText = "Nº Doc."
+        Me.NumeroDocumento.Name = "NumeroDocumento"
+        Me.NumeroDocumento.ReadOnly = True
+        Me.NumeroDocumento.Width = 70
+        '
+        'DescricaoHistorico
+        '
+        Me.DescricaoHistorico.DataPropertyName = "DescricaoHistorico"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.DescricaoHistorico.DefaultCellStyle = DataGridViewCellStyle4
+        Me.DescricaoHistorico.HeaderText = "Histórico"
+        Me.DescricaoHistorico.Name = "DescricaoHistorico"
+        Me.DescricaoHistorico.ReadOnly = True
+        Me.DescricaoHistorico.Width = 375
+        '
+        'ValorLancamento
+        '
+        Me.ValorLancamento.DataPropertyName = "ValorLancamento"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.Format = "N2"
+        DataGridViewCellStyle5.NullValue = "0"
+        Me.ValorLancamento.DefaultCellStyle = DataGridViewCellStyle5
+        Me.ValorLancamento.HeaderText = "Valor"
+        Me.ValorLancamento.Name = "ValorLancamento"
+        Me.ValorLancamento.ReadOnly = True
+        '
+        'TipoLancamento
+        '
+        Me.TipoLancamento.DataPropertyName = "TipoLancamento"
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.TipoLancamento.DefaultCellStyle = DataGridViewCellStyle6
+        Me.TipoLancamento.HeaderText = "D/C"
+        Me.TipoLancamento.Name = "TipoLancamento"
+        Me.TipoLancamento.ReadOnly = True
+        Me.TipoLancamento.Width = 40
+        '
+        'NumeroSequencia
+        '
+        Me.NumeroSequencia.DataPropertyName = "NumeroSequencia"
+        Me.NumeroSequencia.HeaderText = "NumeroSequencia"
+        Me.NumeroSequencia.Name = "NumeroSequencia"
+        Me.NumeroSequencia.Visible = False
+        '
+        'AgenciaEContaCompleto
+        '
+        Me.AgenciaEContaCompleto.DataPropertyName = "AgenciaEContaCompleto"
+        Me.AgenciaEContaCompleto.HeaderText = "AgenciaEContaCompleto"
+        Me.AgenciaEContaCompleto.Name = "AgenciaEContaCompleto"
+        Me.AgenciaEContaCompleto.Visible = False
+        '
+        'CodigoBancoArquivo
+        '
+        Me.CodigoBancoArquivo.DataPropertyName = "CodigoBancoArquivo"
+        Me.CodigoBancoArquivo.HeaderText = "CodigoBancoArquivo "
+        Me.CodigoBancoArquivo.Name = "CodigoBancoArquivo"
+        Me.CodigoBancoArquivo.Visible = False
+        '
+        'LoteServico
+        '
+        Me.LoteServico.DataPropertyName = "LoteServico"
+        Me.LoteServico.HeaderText = "LoteServico "
+        Me.LoteServico.Name = "LoteServico"
+        Me.LoteServico.Visible = False
+        '
+        'TipoInscricao
+        '
+        Me.TipoInscricao.DataPropertyName = "TipoInscricao"
+        Me.TipoInscricao.HeaderText = "TipoInscricao"
+        Me.TipoInscricao.Name = "TipoInscricao"
+        Me.TipoInscricao.Visible = False
+        '
+        'NumeroInscricao
+        '
+        Me.NumeroInscricao.DataPropertyName = "NumeroInscricao"
+        Me.NumeroInscricao.HeaderText = "NumeroInscricao"
+        Me.NumeroInscricao.Name = "NumeroInscricao"
+        Me.NumeroInscricao.Visible = False
+        '
+        'CodigoConvenio
+        '
+        Me.CodigoConvenio.DataPropertyName = "CodigoConvenio"
+        Me.CodigoConvenio.HeaderText = "CodigoConvenio"
+        Me.CodigoConvenio.Name = "CodigoConvenio"
+        Me.CodigoConvenio.Visible = False
+        '
+        'TipoServico
+        '
+        Me.TipoServico.DataPropertyName = "TipoServico"
+        Me.TipoServico.HeaderText = "TipoServico"
+        Me.TipoServico.Name = "TipoServico"
+        Me.TipoServico.Visible = False
+        '
+        'ContaCorrenteAgencia
+        '
+        Me.ContaCorrenteAgencia.DataPropertyName = "ContaCorrenteAgencia"
+        Me.ContaCorrenteAgencia.HeaderText = "ContaCorrenteAgencia"
+        Me.ContaCorrenteAgencia.Name = "ContaCorrenteAgencia"
+        Me.ContaCorrenteAgencia.Visible = False
+        '
+        'ContaCorrenteAgenciaDv
+        '
+        Me.ContaCorrenteAgenciaDv.DataPropertyName = "ContaCorrenteAgenciaDv"
+        Me.ContaCorrenteAgenciaDv.HeaderText = "ContaCorrenteAgenciaDv"
+        Me.ContaCorrenteAgenciaDv.Name = "ContaCorrenteAgenciaDv"
+        Me.ContaCorrenteAgenciaDv.Visible = False
+        '
+        'ContaCorrenteNumero
+        '
+        Me.ContaCorrenteNumero.DataPropertyName = "ContaCorrenteNumero"
+        Me.ContaCorrenteNumero.HeaderText = "ContaCorrenteNumero"
+        Me.ContaCorrenteNumero.Name = "ContaCorrenteNumero"
+        Me.ContaCorrenteNumero.Visible = False
+        '
+        'ContaCorrenteNumeroDv
+        '
+        Me.ContaCorrenteNumeroDv.DataPropertyName = "ContaCorrenteNumeroDv"
+        Me.ContaCorrenteNumeroDv.HeaderText = "ContaCorrenteNumeroDv"
+        Me.ContaCorrenteNumeroDv.Name = "ContaCorrenteNumeroDv"
+        Me.ContaCorrenteNumeroDv.Visible = False
+        '
+        'NomeEmpresa
+        '
+        Me.NomeEmpresa.DataPropertyName = "NomeEmpresa"
+        Me.NomeEmpresa.HeaderText = "NomeEmpresa"
+        Me.NomeEmpresa.Name = "NomeEmpresa"
+        Me.NomeEmpresa.Visible = False
+        '
+        'CPMF
+        '
+        Me.CPMF.DataPropertyName = "CPMF"
+        Me.CPMF.HeaderText = "CPMF"
+        Me.CPMF.Name = "CPMF"
+        Me.CPMF.Visible = False
+        '
+        'DataContabil
+        '
+        Me.DataContabil.DataPropertyName = "DataContabil"
+        Me.DataContabil.HeaderText = "DataContabil"
+        Me.DataContabil.Name = "DataContabil"
+        Me.DataContabil.Visible = False
+        '
+        'TipoLancamentoDescricao
+        '
+        Me.TipoLancamentoDescricao.DataPropertyName = "TipoLancamentoDescricao"
+        Me.TipoLancamentoDescricao.HeaderText = "TipoLancamentoDescricao"
+        Me.TipoLancamentoDescricao.Name = "TipoLancamentoDescricao"
+        Me.TipoLancamentoDescricao.Visible = False
+        '
+        'Categoria
+        '
+        Me.Categoria.DataPropertyName = "Categoria"
+        Me.Categoria.HeaderText = "Categoria"
+        Me.Categoria.Name = "Categoria"
+        Me.Categoria.Visible = False
+        '
+        'CodigoHistorico
+        '
+        Me.CodigoHistorico.DataPropertyName = "CodigoHistorico"
+        Me.CodigoHistorico.HeaderText = "CodigoHistorico"
+        Me.CodigoHistorico.Name = "CodigoHistorico"
+        Me.CodigoHistorico.Visible = False
+        '
+        'TipoComplemento
+        '
+        Me.TipoComplemento.DataPropertyName = "TipoComplemento"
+        Me.TipoComplemento.HeaderText = "TipoComplemento"
+        Me.TipoComplemento.Name = "TipoComplemento"
+        Me.TipoComplemento.Visible = False
+        '
+        'ComplementoBancoOrigem
+        '
+        Me.ComplementoBancoOrigem.DataPropertyName = "ComplementoBancoOrigem"
+        Me.ComplementoBancoOrigem.HeaderText = "ComplementoBancoOrigem"
+        Me.ComplementoBancoOrigem.Name = "ComplementoBancoOrigem"
+        Me.ComplementoBancoOrigem.Visible = False
+        '
+        'ComplementoAgenciaOrigem
+        '
+        Me.ComplementoAgenciaOrigem.DataPropertyName = "ComplementoAgenciaOrigem"
+        Me.ComplementoAgenciaOrigem.HeaderText = "ComplementoAgenciaOrigem"
+        Me.ComplementoAgenciaOrigem.Name = "ComplementoAgenciaOrigem"
+        Me.ComplementoAgenciaOrigem.Visible = False
         '
         'Extrato
         '
@@ -465,4 +712,30 @@ Partial Class Extrato
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents dgvExtrato As System.Windows.Forms.DataGridView
     Friend WithEvents tsbImprimir As System.Windows.Forms.ToolStripButton
+    Friend WithEvents DataLancamento As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NumeroDocumento As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DescricaoHistorico As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ValorLancamento As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoLancamento As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NumeroSequencia As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents AgenciaEContaCompleto As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CodigoBancoArquivo As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LoteServico As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoInscricao As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NumeroInscricao As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CodigoConvenio As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoServico As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ContaCorrenteAgencia As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ContaCorrenteAgenciaDv As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ContaCorrenteNumero As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ContaCorrenteNumeroDv As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents NomeEmpresa As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CPMF As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DataContabil As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoLancamentoDescricao As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Categoria As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CodigoHistorico As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents TipoComplemento As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ComplementoBancoOrigem As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ComplementoAgenciaOrigem As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

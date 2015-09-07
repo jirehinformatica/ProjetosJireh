@@ -530,6 +530,15 @@
             End Set
         End Property
 
+        Public ReadOnly Property AgenciaEContaCompleto As String
+            Get
+                If Not ArquivoValidoValue Then
+                    Return String.Empty
+                End If
+                Return ContaCorrenteAgencia.Substring(1) & "." & ContaCorrenteNumero.Substring(1, 3) & "." & ContaCorrenteNumero.Substring(4, 8) & "-" & ContaCorrenteNumeroDv
+            End Get
+        End Property
+
         Protected Function Ler(ByVal Linha As String, ByVal Inicio As Integer, Optional ByVal Tamanho As Integer = -1) As String
             Try
                 If ArquivoValidoValue Then

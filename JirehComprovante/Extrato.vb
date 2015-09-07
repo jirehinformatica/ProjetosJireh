@@ -1,8 +1,10 @@
 ﻿Public Class Extrato
 
     Protected WithEvents Eventos As JirehLayouts.JirehLayoutEventos
-    Private Extrato As List(Of JirehLayouts.ExtratoCNAB240.tpItemExtrato)
+    Private Ext As List(Of JirehLayouts.ExtratoCNAB240.tpItemExtrato)
+    Private Head As JirehLayouts.ExtratoCNAB240.tpHeaderLote
     Private Leitura As JirehLayouts.ExtratoCNAB240
+    Protected Lista As List(Of JirehReports.ExtratoReport.ItemExtrato)
 
 #Region "PREENCHER A TELA"
 
@@ -15,6 +17,7 @@
                 Exit Sub
             End If
 
+            Head = Query
             txtDataInicio.Text = Query.DataSaldoInicio.ToString("dd/MM/yyyy")
             txtDataFinal.Text = Query.TrailerLote.DataSaldoFinal.ToString("dd/MM/yyyy")
             txtSaldoInicio.Text = Query.ValorSaldoInicio.ToString("N")
@@ -27,9 +30,9 @@
             txtDebitos.Text = Query.TrailerLote.TotalDebito.ToString("N")
             txtLimite.Text = Query.TrailerLote.LimiteConta.ToString("N")
 
-            dgvExtrato.DataSource = Query.SegmentoE
-
-            Extrato = Query.SegmentoE
+            Dim Ls As List(Of JirehLayouts.ExtratoCNAB240.tpItemExtrato) = (From i In Query.SegmentoE Order By i.DataLancamento, i.NumeroDocumento Select i).ToList
+            dgvExtrato.DataSource = Ls
+            Ext = Ls
 
         Catch ex As Exception
             Throw
@@ -50,7 +53,8 @@
             txtDebitos.Text = String.Empty
             txtLimite.Text = String.Empty
 
-            Extrato = New List(Of JirehLayouts.ExtratoCNAB240.tpItemExtrato)
+            Ext = New List(Of JirehLayouts.ExtratoCNAB240.tpItemExtrato)
+            Head = Nothing
 
         Catch ex As Exception
             Throw
@@ -179,19 +183,86 @@
 
     Private Sub tsbImprimir_Click(sender As Object, e As EventArgs) Handles tsbImprimir.Click
         Try
-            If Extrato Is Nothing OrElse Extrato.Count = 0 Then
+            If Ext Is Nothing OrElse Ext.Count = 0 Then
                 Alerta("Não existe nenhum lançamento para o extrato informado.")
                 Exit Sub
             End If
 
+            If Lista Is Nothing Then
+                Lista = New List(Of JirehReports.ExtratoReport.ItemExtrato)
+            End If
 
+            Dim ls As New List(Of JirehReports.ExtratoReport.ItemExtrato)
+            Dim aux() As JirehReports.ExtratoReport.ItemExtrato
+            aux = (From i In Ext.AsEnumerable Where i.TipoLancamento.ToUpper = "D" Select New JirehReports.ExtratoReport.ItemExtrato With { _
+                   .ContaCorrente = Head.AgenciaEContaCompleto,
+                   .DataLancamento = i.DataLancamento,
+                   .Historico = i.DescricaoHistorico,
+                   .LimiteCheque = Head.TrailerLote.LimiteConta,
+                   .NumeroDoc = i.NumeroDocumento,
+                   .SaldoBloqueado = Head.TrailerLote.SaldoBloqueado,
+                   .SaldoDisponivel = Head.TrailerLote.ValorSaldoFinal,
+                   .SaldoInicio = Head.ValorSaldoInicio,
+                   .DataExtrato = Head.TrailerLote.DataSaldoFinal,
+                   .ValorLancamento = i.ValorLancamento * -1}
+               ).ToArray
+            ls.AddRange(aux)
+
+            aux = (From i In Ext.AsEnumerable Where i.TipoLancamento.ToUpper = "C" Select New JirehReports.ExtratoReport.ItemExtrato With { _
+                   .ContaCorrente = Head.AgenciaEContaCompleto,
+                   .DataLancamento = i.DataLancamento,
+                   .Historico = i.DescricaoHistorico,
+                   .LimiteCheque = Head.TrailerLote.LimiteConta,
+                   .NumeroDoc = i.NumeroDocumento,
+                   .SaldoBloqueado = Head.TrailerLote.SaldoBloqueado,
+                   .SaldoDisponivel = Head.TrailerLote.ValorSaldoFinal,
+                   .SaldoInicio = Head.ValorSaldoInicio,
+                   .DataExtrato = Head.TrailerLote.DataSaldoFinal,
+                   .ValorLancamento = i.ValorLancamento}
+               ).ToArray
+            ls.AddRange(aux)
+
+            aux = (From i In ls.AsEnumerable Order By i.DataLancamento, i.NumeroDoc).ToArray
+            aux(0).SaldoLinha = Head.ValorSaldoInicio + aux(0).ValorLancamento
+            If aux(0).SaldoLinha < 0 Then
+                aux(0).DCSaldoLinha = "D"
+            Else
+                aux(0).DCSaldoLinha = "C"
+            End If
+            If aux(0).ValorLancamento < 0 Then
+                aux(0).DCSaldoValor = "D"
+            Else
+                aux(0).DCSaldoValor = "C"
+            End If
+
+            For p As Integer = 1 To aux.Length - 1
+                aux(p).SaldoLinha = aux(p - 1).SaldoLinha + aux(p).ValorLancamento
+                If aux(p).SaldoLinha < 0 Then
+                    aux(p).DCSaldoLinha = "D"
+                Else
+                    aux(p).DCSaldoLinha = "C"
+                End If
+                If aux(p).ValorLancamento < 0 Then
+                    aux(p).DCSaldoValor = "D"
+                Else
+                    aux(p).DCSaldoValor = "C"
+                End If
+            Next
+
+            Lista.AddRange(aux)
+
+            If dgvExtrato.IsCurrentCellInEditMode Then
+                dgvExtrato.CommitEdit(DataGridViewDataErrorContexts.Commit)
+            End If
+            Dim Rel As New JirehReports.ExtratoReport
+            Relatorio.Visualizar(Rel, Lista)
 
         Catch ex As Exception
             TratarErros(ex)
         End Try
     End Sub
 
-    Private Sub New()
+    Public Sub New()
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -199,7 +270,7 @@
         ' Add any initialization after the InitializeComponent() call.
 
         Try
-            Extrato = New List(Of JirehLayouts.ExtratoCNAB240.tpItemExtrato)
+            LimparDados()
         Catch ex As Exception
             TratarErros(ex)
         End Try
