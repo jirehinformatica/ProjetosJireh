@@ -810,47 +810,10 @@
           <TopBorder>
             <Style>Solid</Style>
           </TopBorder>
-          <LeftBorder>
-            <Style>Solid</Style>
-          </LeftBorder>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox18">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Saldo Total</Value>
-                <Style>
-                  <FontFamily>Verdana</FontFamily>
-                  <FontWeight>SemiBold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox11</rd:DefaultName>
-        <Top>6.95824cm</Top>
-        <Left>0.34078cm</Left>
-        <Height>0.6cm</Height>
-        <Width>8.50604cm</Width>
-        <ZIndex>13</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <TopBorder>
-            <Style>Solid</Style>
-          </TopBorder>
           <BottomBorder>
+            <Color>Black</Color>
             <Style>Solid</Style>
+            <Width>1pt</Width>
           </BottomBorder>
           <LeftBorder>
             <Style>Solid</Style>
@@ -884,7 +847,7 @@
         <Left>8.84682cm</Left>
         <Height>0.6cm</Height>
         <Width>10.16cm</Width>
-        <ZIndex>14</ZIndex>
+        <ZIndex>13</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -924,48 +887,7 @@
         <Left>8.84682cm</Left>
         <Height>0.6cm</Height>
         <Width>10.16cm</Width>
-        <ZIndex>15</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-          <TopBorder>
-            <Style>Solid</Style>
-          </TopBorder>
-          <RightBorder>
-            <Style>Solid</Style>
-          </RightBorder>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="Textbox21">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Format(First(Fields!SaldoTotal.Value, "dsExtrato"), "#,##0.00")</Value>
-                <Style>
-                  <FontFamily>Verdana</FontFamily>
-                  <FontWeight>SemiBold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style>
-              <TextAlign>Right</TextAlign>
-            </Style>
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>Textbox11</rd:DefaultName>
-        <Top>6.95824cm</Top>
-        <Left>8.84682cm</Left>
-        <Height>0.6cm</Height>
-        <Width>10.16cm</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>14</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -974,7 +896,9 @@
             <Style>Solid</Style>
           </TopBorder>
           <BottomBorder>
+            <Color>Black</Color>
             <Style>Solid</Style>
+            <Width>1pt</Width>
           </BottomBorder>
           <RightBorder>
             <Style>Solid</Style>
@@ -1005,11 +929,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox22</rd:DefaultName>
-        <Top>7.73463cm</Top>
+        <Top>7.09963cm</Top>
         <Left>7.40515cm</Left>
         <Height>0.6cm</Height>
         <Width>11.60167cm</Width>
-        <ZIndex>17</ZIndex>
+        <ZIndex>15</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1021,7 +945,7 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>8.73292cm</Height>
+    <Height>7.96563cm</Height>
     <Style />
   </Body>
   <Width>7.64434in</Width>
