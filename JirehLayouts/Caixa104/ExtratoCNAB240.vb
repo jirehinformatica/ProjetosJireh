@@ -296,6 +296,7 @@
 
         Public Sub New()
             Ocorrencia = New ArquivoOcorrencia("00|  ")
+            CodigoConvenio = String.Empty
         End Sub
 
         Public Property Ocorrencia As ArquivoOcorrencia
@@ -644,7 +645,13 @@
             ArquivoValidoValue = Existe > 0
             If Not ArquivoValidoValue Then
                 Dim aux As Boolean = False
-                Eventos.OnMensagem("Convênio não autorizado para leitura do arquivo. Entre em contato com o suporte.", aux)
+                Dim convAux As String
+                If IsNumeric(HeaderArquivo.CodigoConvenio) Then
+                    convAux = HeaderArquivo.CodigoConvenio.ToInteger
+                Else
+                    convAux = HeaderArquivo.CodigoConvenio
+                End If
+                Eventos.OnMensagem("O convênio " & convAux & ", não está autorizado para leitura do arquivo. Entre em contato com o suporte.", aux)
                 Return False
             End If
 

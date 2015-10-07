@@ -330,6 +330,7 @@
 
         Public Sub New()
             Ocorrencia = New ArquivoOcorrencia("00")
+            CodigoConvenio = ""
         End Sub
 
         Public Property Ocorrencia As ArquivoOcorrencia
@@ -482,7 +483,7 @@
             End If
 
             Dim Existe As Integer = (From i In NumeroConvenios.Split(";").AsEnumerable Where i.Trim = HeaderLote.CodigoConvenio.Trim).ToList.Count
-            ArquivoValidoValue = Existe > 0
+            ArquivoValidoValue = Existe > 0 AndAlso Not String.IsNullOrEmpty(HeaderLote.CodigoConvenio)
 
             If Not ArquivoValidoValue Then
                 Dim aux As Boolean = False
