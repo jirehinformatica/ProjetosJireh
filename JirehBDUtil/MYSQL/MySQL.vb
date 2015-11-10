@@ -51,7 +51,7 @@ Public Class MySQL
     Private Const cDataSource As String = "Data Source"
     Private Const cUserId As String = "User Id"
     Private Const cPassWord As String = "Password"
-    Private Const cPooling As String = "pooling=false"
+    Private Const cPooling As String = "pooling=true"
 
     Private DataBaseValue As String
     Private DataSourceValue As String

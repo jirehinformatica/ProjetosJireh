@@ -9,4 +9,5 @@
     Public Property Ativo As Boolean
     Public Property Estacao As Integer
     Public Property CodigoSerial As Integer
+    Public Property UsarLogin As Boolean
 End Class

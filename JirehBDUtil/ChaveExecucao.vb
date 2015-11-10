@@ -27,8 +27,14 @@ Public Class ChaveExecucao
         End Try
     End Function
 
-    Public Sub New()
+    Public Sub New(Optional ByVal Transacao As MySQLTransacao = Nothing)
         Try
+            If Transacao IsNot Nothing Then
+                Tx = Transacao
+            Else
+                Tx = New MySQLTransacao(CnMySQL)
+            End If
+
             Localizar = New ManagementObjectSearcher(ConsultaDisco)
             ListaValue = New Dictionary(Of String, List(Of ItemInterface))
 
@@ -198,25 +204,27 @@ Public Class ChaveExecucao
 
     Public Sub RegistrarPc(ByVal CNPJ As String, ByVal CodigoSerialHd As String, ByVal Data As DateTime)
         Try
-            Tx = New MySQLTransacao(CnMySQL)
-
+            Dim existe As Boolean = False
             Dim GerItensPc As New Dal_MaquinasAtivasItens(CnMySQL, Tx)
-
             CnMySQL.Open()
             Tx.BeginTransacao()
 
             Dim Item As Dal_MaquinasAtivasItens.MaquinasAtivasItensColunms = GerItensPc.Consultar(CNPJ, CodigoSerialHd)
-            If Item IsNot Nothing Then
-                GerItensPc.Excluir(CNPJ, CodigoSerialHd)
-            Else
+            If String.IsNullOrEmpty(Item.CnpjEmp_mai) Then
                 Item = New Dal_MaquinasAtivasItens.MaquinasAtivasItensColunms
+            Else
+                existe = True
             End If
             Item.Ativou_mai = True
             Item.Cadastro_mai = Data
             Item.CnpjEmp_mai = CNPJ
             Item.CodigoSer_mai = CodigoSerialHd
 
-            GerItensPc.Incluir(Item)
+            If existe Then
+                GerItensPc.Alterar(Item)
+            Else
+                GerItensPc.Incluir(Item)
+            End If
 
             InformacoesServidor = GerItensPc.ConsultarParaRegistro(CNPJ, CodigoSerialHd)
 

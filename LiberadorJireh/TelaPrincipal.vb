@@ -82,6 +82,57 @@ Public Class TelaPrincipal
 
 #End Region
 
+#Region "Usuarios, classe e seleção"
+
+    Private Function GetUsuario() As JirehBDUtil.Dal_Usuarios.UsuariosColunms
+        Try
+            Dim aux As Object
+            aux = lbUsuarios.SelectedItem
+            Dim i As Integer = lbUsuarios.SelectedIndex
+            If aux Is Nothing OrElse String.IsNullOrEmpty(aux) OrElse i <= 0 Then
+                Return New JirehBDUtil.Dal_Usuarios.UsuariosColunms
+            End If
+            Dim aux2 As String() = aux.ToString.Split("|")
+
+            Dim novo As New JirehBDUtil.Dal_Usuarios.UsuariosColunms
+            novo.Login_usu = aux2(1).Replace("_", "").Trim.ToString
+            novo.CnpjEmp_usu = EmpresaSelecionada.Cnpj_emp
+
+            Dim oUsuario As New JirehBDUtil.Dal_Usuarios(CnMySQL)
+            novo = oUsuario.Consultar(novo.CnpjEmp_usu, novo.Login_usu)
+
+            Return novo
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Private Sub CarregarUsuarios(ByVal Cnpj As String)
+        Try
+            Dim oConsulta As New JirehBDUtil.Dal_Usuarios(CnMySQL)
+            Dim Usuarios As List(Of Dal_Usuarios.UsuariosColunms)
+            Usuarios = oConsulta.Consultar(Cnpj)
+
+            lbUsuarios.Items.Clear()
+            lbUsuarios.Items.Add("_Ativo_|______Login______")
+
+            If Usuarios Is Nothing OrElse Usuarios.Count = 0 Then
+                Exit Sub
+            End If
+
+            lbUsuarios.Items.AddRange(Usuarios.AsEnumerable.Select(Function(x)
+                                                                       Dim aux As String = String.Empty
+                                                                       aux = "__" & IIf(x.Ativo_usu, "SIM", "NÃO") & "__|"
+                                                                       aux &= "__" & x.Login_usu.ToString
+                                                                       Return aux
+                                                                   End Function).ToArray)
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+#End Region
+
 #Region "Convenios, classe e seleção"
 
     Private Class ConveniosSelecionado
@@ -256,6 +307,8 @@ Public Class TelaPrincipal
         btnIncluirConvenio.Enabled = Value
         btnTelaAdd.Enabled = Value
         btnTelaRemove.Enabled = Value
+        btnUsuGravar.Enabled = Value
+        btnUsuReset.Enabled = Value
     End Sub
 
     Private Sub TelaPrincipal_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -296,6 +349,8 @@ Public Class TelaPrincipal
                 rbInativo.Checked = True
             End If
 
+            cbxEmpresaUsaUsuario.Checked = EmpresaSelecionada.UsaLogin_emp
+
             If EmpresaSelecionada.Cnpj_emp.Length = 18 Then
                 cboTipoPessoa.SelectedIndex = 0
             Else
@@ -321,6 +376,7 @@ Public Class TelaPrincipal
             CarregarConvenios(EmpresaSelecionada.Cnpj_emp)
             CarregarTelas()
             CarregarTelasDaEmpresa(EmpresaSelecionada.Cnpj_emp)
+            CarregarUsuarios(EmpresaSelecionada.Cnpj_emp)
 
             Carregando = False
         Catch ex As Exception
@@ -734,6 +790,169 @@ Public Class TelaPrincipal
                 Exit Sub
             End If
             GerTela.Excluir(EmpresaSelecionada.Cnpj_emp, o)
+
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Sub btnUsuGravar_Click(sender As Object, e As EventArgs) Handles btnUsuGravar.Click
+        Try
+            If Not ValidarUsuario() Then
+                Exit Sub
+            End If
+
+            Dim oCons As New JirehBDUtil.Dal_Usuarios(CnMySQL)
+            Dim usuario As New JirehBDUtil.Dal_Usuarios.UsuariosColunms
+            usuario = oCons.Consultar(EmpresaSelecionada.Cnpj_emp, txtUsuLogin.Text)
+
+            Dim Incluir As Boolean = String.IsNullOrEmpty(usuario.Login_usu)
+
+            usuario.Ativo_usu = rbUsuAtivo.Checked
+            usuario.Cadastro_usu = Date.Now
+            usuario.CnpjEmp_usu = EmpresaSelecionada.Cnpj_emp
+            usuario.Email_usu = txtUsuEmail.Text
+            usuario.Login_usu = txtUsuLogin.Text
+            usuario.Nome_usu = txtUsuNome.Text
+
+            If Incluir Then
+                usuario.Senha_usu = "123456"
+                oCons.Inserir(usuario)
+            Else
+                oCons.Alterar(usuario)
+            End If
+
+            CarregarUsuarios(EmpresaSelecionada.Cnpj_emp)
+
+            txtUsuEmail.Text = String.Empty
+            txtUsuLogin.Text = String.Empty
+            txtUsuNome.Text = String.Empty
+
+            rbUsuAtivo.Checked = False
+            rbUsuInativo.Checked = False
+
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Function ValidarUsuario() As Boolean
+        Try
+            If EmpresaSelecionada Is Nothing OrElse Carregando Then
+                Return False
+            End If
+
+            If String.IsNullOrEmpty(EmpresaSelecionada.Cnpj_emp) Then
+                Alerta("Empresa não encontrada")
+                Return False
+            End If
+
+            If String.IsNullOrEmpty(txtUsuLogin.Text) Then
+                Alerta("Informe o login do usuário.")
+                Return False
+            End If
+
+            If String.IsNullOrEmpty(txtUsuEmail.Text) Then
+                Alerta("Informe o e-mail do usuário.")
+                Return False
+            End If
+
+            If String.IsNullOrEmpty(txtUsuNome.Text) Then
+                Alerta("Informe o nome do usuário.")
+                Return False
+            End If
+
+            Return True
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Private Sub btnUsuReset_Click(sender As Object, e As EventArgs) Handles btnUsuReset.Click
+        Try
+            If Not ValidarUsuario() Then
+                Exit Sub
+            End If
+
+            Dim oCons As New JirehBDUtil.Dal_Usuarios(CnMySQL)
+            Dim usuario As New JirehBDUtil.Dal_Usuarios.UsuariosColunms
+            usuario = oCons.Consultar(EmpresaSelecionada.Cnpj_emp, txtUsuLogin.Text)
+
+            Dim NaoAchou As Boolean = String.IsNullOrEmpty(usuario.Login_usu)
+
+            If Not NaoAchou AndAlso Not usuario.Ativo_usu Then
+                Alerta("O usuário não pode ser iniciado, ele está inativo.")
+                Exit Sub
+            End If
+
+            If NaoAchou Then
+                Alerta("Usuário não cadastrado.")
+                Exit Sub
+            End If
+
+            usuario.Senha_usu = "123456"
+            oCons.Alterar(usuario)
+
+            txtUsuEmail.Text = String.Empty
+            txtUsuLogin.Text = String.Empty
+            txtUsuNome.Text = String.Empty
+
+            rbUsuAtivo.Checked = False
+            rbUsuInativo.Checked = False
+
+            Alerta("Senha iniciada com sucesso. No proximo login do usuário será solicitado a alteração.")
+
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Sub cbxEmpresaUsaUsuario_CheckedChanged(sender As Object, e As EventArgs) Handles cbxEmpresaUsaUsuario.CheckedChanged
+        Try
+            If EmpresaSelecionada Is Nothing OrElse Carregando Then
+                Exit Sub
+            End If
+
+            If String.IsNullOrEmpty(EmpresaSelecionada.Cnpj_emp) Then
+                Alerta("Empresa não encontrada")
+                Exit Sub
+            End If
+
+            EmpresaSelecionada.UsaLogin_emp = cbxEmpresaUsaUsuario.Checked
+
+            GerEmpresas.Alterar(EmpresaSelecionada)
+
+            Dim aux As String = IIf(EmpresaSelecionada.UsaLogin_emp, "usar login", "não usar login")
+
+            Alerta("A empresa passou a " & aux & " com sucesso.")
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Sub lbUsuarios_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lbUsuarios.SelectedIndexChanged
+        Try
+            If EmpresaSelecionada Is Nothing OrElse Carregando Then
+                Exit Sub
+            End If
+
+            If String.IsNullOrEmpty(EmpresaSelecionada.Cnpj_emp) Then
+                Alerta("Empresa não encontrada")
+                Exit Sub
+            End If
+
+            Dim usuario As JirehBDUtil.Dal_Usuarios.UsuariosColunms = GetUsuario()
+
+            txtUsuLogin.Text = usuario.Login_usu
+            txtUsuNome.Text = usuario.Nome_usu
+            txtUsuEmail.Text = usuario.Email_usu
+            If usuario.Ativo_usu Then
+                rbUsuInativo.Checked = False
+                rbUsuAtivo.Checked = True
+            Else
+                rbUsuAtivo.Checked = False
+                rbUsuInativo.Checked = True
+            End If
 
         Catch ex As Exception
             TratarErros(ex)

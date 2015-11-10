@@ -23,16 +23,16 @@ Partial Class ssAbertura
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lstAcao = New System.Windows.Forms.ListBox()
         Me.lblVersao = New System.Windows.Forms.Label()
         Me.lblCorporacao = New System.Windows.Forms.Label()
         Me.lblAplicacaoNome = New System.Windows.Forms.Label()
-        Me.lstAcao = New System.Windows.Forms.ListBox()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.LightGoldenrodYellow
+        Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.lstAcao)
         Me.Panel1.Controls.Add(Me.lblVersao)
@@ -43,6 +43,16 @@ Partial Class ssAbertura
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(286, 262)
         Me.Panel1.TabIndex = 0
+        '
+        'lstAcao
+        '
+        Me.lstAcao.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lstAcao.FormattingEnabled = True
+        Me.lstAcao.Location = New System.Drawing.Point(0, 107)
+        Me.lstAcao.Name = "lstAcao"
+        Me.lstAcao.SelectionMode = System.Windows.Forms.SelectionMode.None
+        Me.lstAcao.Size = New System.Drawing.Size(284, 123)
+        Me.lstAcao.TabIndex = 3
         '
         'lblVersao
         '
@@ -75,16 +85,6 @@ Partial Class ssAbertura
         Me.lblAplicacaoNome.Name = "lblAplicacaoNome"
         Me.lblAplicacaoNome.Size = New System.Drawing.Size(284, 50)
         Me.lblAplicacaoNome.TabIndex = 0
-        '
-        'lstAcao
-        '
-        Me.lstAcao.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lstAcao.FormattingEnabled = True
-        Me.lstAcao.Location = New System.Drawing.Point(0, 107)
-        Me.lstAcao.Name = "lstAcao"
-        Me.lstAcao.SelectionMode = System.Windows.Forms.SelectionMode.None
-        Me.lstAcao.Size = New System.Drawing.Size(284, 123)
-        Me.lstAcao.TabIndex = 3
         '
         'ssAbertura
         '

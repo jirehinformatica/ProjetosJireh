@@ -59,15 +59,29 @@ Partial Class TelaPrincipal
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtCnpj = New System.Windows.Forms.MaskedTextBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.tpTelas = New System.Windows.Forms.TabPage()
+        Me.btnTelaRemove = New System.Windows.Forms.Button()
+        Me.btnTelaAdd = New System.Windows.Forms.Button()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lsbTelasLiberadas = New System.Windows.Forms.ListBox()
+        Me.lsbTelas = New System.Windows.Forms.ListBox()
+        Me.tpUsuarios = New System.Windows.Forms.TabPage()
+        Me.btnUsuReset = New System.Windows.Forms.Button()
+        Me.rbUsuInativo = New System.Windows.Forms.RadioButton()
+        Me.rbUsuAtivo = New System.Windows.Forms.RadioButton()
+        Me.txtUsuEmail = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtUsuNome = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.btnUsuGravar = New System.Windows.Forms.Button()
+        Me.txtUsuLogin = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cbxEmpresaUsaUsuario = New System.Windows.Forms.CheckBox()
+        Me.lbUsuarios = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.lbEmpresas = New System.Windows.Forms.ListBox()
-        Me.tpTelas = New System.Windows.Forms.TabPage()
-        Me.lsbTelas = New System.Windows.Forms.ListBox()
-        Me.lsbTelasLiberadas = New System.Windows.Forms.ListBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnTelaAdd = New System.Windows.Forms.Button()
-        Me.btnTelaRemove = New System.Windows.Forms.Button()
         Me.tbGeral.SuspendLayout()
         Me.tpGeral.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -76,6 +90,7 @@ Partial Class TelaPrincipal
         Me.GroupBox2.SuspendLayout()
         Me.tpNovoEmpresa.SuspendLayout()
         Me.tpTelas.SuspendLayout()
+        Me.tpUsuarios.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbGeral
@@ -84,6 +99,7 @@ Partial Class TelaPrincipal
         Me.tbGeral.Controls.Add(Me.tpConvenios)
         Me.tbGeral.Controls.Add(Me.tpNovoEmpresa)
         Me.tbGeral.Controls.Add(Me.tpTelas)
+        Me.tbGeral.Controls.Add(Me.tpUsuarios)
         Me.tbGeral.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.tbGeral.Location = New System.Drawing.Point(0, 163)
         Me.tbGeral.Name = "tbGeral"
@@ -453,6 +469,218 @@ Partial Class TelaPrincipal
         Me.Label6.TabIndex = 3
         Me.Label6.Text = "CNPJ da empresa"
         '
+        'tpTelas
+        '
+        Me.tpTelas.Controls.Add(Me.btnTelaRemove)
+        Me.tpTelas.Controls.Add(Me.btnTelaAdd)
+        Me.tpTelas.Controls.Add(Me.Label11)
+        Me.tpTelas.Controls.Add(Me.Label10)
+        Me.tpTelas.Controls.Add(Me.lsbTelasLiberadas)
+        Me.tpTelas.Controls.Add(Me.lsbTelas)
+        Me.tpTelas.Location = New System.Drawing.Point(4, 22)
+        Me.tpTelas.Name = "tpTelas"
+        Me.tpTelas.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpTelas.Size = New System.Drawing.Size(610, 252)
+        Me.tpTelas.TabIndex = 3
+        Me.tpTelas.Text = "Telas/Programas"
+        Me.tpTelas.UseVisualStyleBackColor = True
+        '
+        'btnTelaRemove
+        '
+        Me.btnTelaRemove.Location = New System.Drawing.Point(292, 133)
+        Me.btnTelaRemove.Name = "btnTelaRemove"
+        Me.btnTelaRemove.Size = New System.Drawing.Size(27, 23)
+        Me.btnTelaRemove.TabIndex = 5
+        Me.btnTelaRemove.Text = "<<"
+        Me.btnTelaRemove.UseVisualStyleBackColor = True
+        '
+        'btnTelaAdd
+        '
+        Me.btnTelaAdd.Location = New System.Drawing.Point(292, 104)
+        Me.btnTelaAdd.Name = "btnTelaAdd"
+        Me.btnTelaAdd.Size = New System.Drawing.Size(27, 23)
+        Me.btnTelaAdd.TabIndex = 4
+        Me.btnTelaAdd.Text = ">>"
+        Me.btnTelaAdd.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(350, 11)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(216, 13)
+        Me.Label11.TabIndex = 3
+        Me.Label11.Text = "Telas que a empresa selecionada pode usar"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(8, 12)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(142, 13)
+        Me.Label10.TabIndex = 2
+        Me.Label10.Text = "Telas que existe no sistemas"
+        '
+        'lsbTelasLiberadas
+        '
+        Me.lsbTelasLiberadas.FormattingEnabled = True
+        Me.lsbTelasLiberadas.Location = New System.Drawing.Point(322, 28)
+        Me.lsbTelasLiberadas.Name = "lsbTelasLiberadas"
+        Me.lsbTelasLiberadas.Size = New System.Drawing.Size(280, 212)
+        Me.lsbTelasLiberadas.TabIndex = 1
+        '
+        'lsbTelas
+        '
+        Me.lsbTelas.FormattingEnabled = True
+        Me.lsbTelas.Location = New System.Drawing.Point(8, 28)
+        Me.lsbTelas.Name = "lsbTelas"
+        Me.lsbTelas.Size = New System.Drawing.Size(280, 212)
+        Me.lsbTelas.TabIndex = 0
+        '
+        'tpUsuarios
+        '
+        Me.tpUsuarios.Controls.Add(Me.btnUsuReset)
+        Me.tpUsuarios.Controls.Add(Me.rbUsuInativo)
+        Me.tpUsuarios.Controls.Add(Me.rbUsuAtivo)
+        Me.tpUsuarios.Controls.Add(Me.txtUsuEmail)
+        Me.tpUsuarios.Controls.Add(Me.Label15)
+        Me.tpUsuarios.Controls.Add(Me.txtUsuNome)
+        Me.tpUsuarios.Controls.Add(Me.Label14)
+        Me.tpUsuarios.Controls.Add(Me.btnUsuGravar)
+        Me.tpUsuarios.Controls.Add(Me.txtUsuLogin)
+        Me.tpUsuarios.Controls.Add(Me.Label13)
+        Me.tpUsuarios.Controls.Add(Me.Label12)
+        Me.tpUsuarios.Controls.Add(Me.cbxEmpresaUsaUsuario)
+        Me.tpUsuarios.Controls.Add(Me.lbUsuarios)
+        Me.tpUsuarios.Location = New System.Drawing.Point(4, 22)
+        Me.tpUsuarios.Name = "tpUsuarios"
+        Me.tpUsuarios.Padding = New System.Windows.Forms.Padding(3)
+        Me.tpUsuarios.Size = New System.Drawing.Size(610, 252)
+        Me.tpUsuarios.TabIndex = 4
+        Me.tpUsuarios.Text = "Usuários"
+        Me.tpUsuarios.UseVisualStyleBackColor = True
+        '
+        'btnUsuReset
+        '
+        Me.btnUsuReset.Location = New System.Drawing.Point(527, 52)
+        Me.btnUsuReset.Name = "btnUsuReset"
+        Me.btnUsuReset.Size = New System.Drawing.Size(75, 23)
+        Me.btnUsuReset.TabIndex = 8
+        Me.btnUsuReset.Text = "Reset"
+        Me.btnUsuReset.UseVisualStyleBackColor = True
+        '
+        'rbUsuInativo
+        '
+        Me.rbUsuInativo.AutoSize = True
+        Me.rbUsuInativo.Location = New System.Drawing.Point(369, 56)
+        Me.rbUsuInativo.Name = "rbUsuInativo"
+        Me.rbUsuInativo.Size = New System.Drawing.Size(57, 17)
+        Me.rbUsuInativo.TabIndex = 6
+        Me.rbUsuInativo.TabStop = True
+        Me.rbUsuInativo.Text = "Inativo"
+        Me.rbUsuInativo.UseVisualStyleBackColor = True
+        '
+        'rbUsuAtivo
+        '
+        Me.rbUsuAtivo.AutoSize = True
+        Me.rbUsuAtivo.Location = New System.Drawing.Point(314, 56)
+        Me.rbUsuAtivo.Name = "rbUsuAtivo"
+        Me.rbUsuAtivo.Size = New System.Drawing.Size(49, 17)
+        Me.rbUsuAtivo.TabIndex = 5
+        Me.rbUsuAtivo.TabStop = True
+        Me.rbUsuAtivo.Text = "Ativo"
+        Me.rbUsuAtivo.UseVisualStyleBackColor = True
+        '
+        'txtUsuEmail
+        '
+        Me.txtUsuEmail.Location = New System.Drawing.Point(47, 54)
+        Me.txtUsuEmail.Name = "txtUsuEmail"
+        Me.txtUsuEmail.Size = New System.Drawing.Size(259, 20)
+        Me.txtUsuEmail.TabIndex = 4
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.ForeColor = System.Drawing.Color.Red
+        Me.Label15.Location = New System.Drawing.Point(8, 58)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(35, 13)
+        Me.Label15.TabIndex = 10
+        Me.Label15.Text = "E-mail"
+        '
+        'txtUsuNome
+        '
+        Me.txtUsuNome.Location = New System.Drawing.Point(208, 23)
+        Me.txtUsuNome.Name = "txtUsuNome"
+        Me.txtUsuNome.Size = New System.Drawing.Size(246, 20)
+        Me.txtUsuNome.TabIndex = 2
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.ForeColor = System.Drawing.Color.Red
+        Me.Label14.Location = New System.Drawing.Point(167, 26)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(35, 13)
+        Me.Label14.TabIndex = 8
+        Me.Label14.Text = "Nome"
+        '
+        'btnUsuGravar
+        '
+        Me.btnUsuGravar.Location = New System.Drawing.Point(432, 53)
+        Me.btnUsuGravar.Name = "btnUsuGravar"
+        Me.btnUsuGravar.Size = New System.Drawing.Size(75, 23)
+        Me.btnUsuGravar.TabIndex = 7
+        Me.btnUsuGravar.Text = "Gravar"
+        Me.btnUsuGravar.UseVisualStyleBackColor = True
+        '
+        'txtUsuLogin
+        '
+        Me.txtUsuLogin.Location = New System.Drawing.Point(47, 23)
+        Me.txtUsuLogin.Name = "txtUsuLogin"
+        Me.txtUsuLogin.Size = New System.Drawing.Size(114, 20)
+        Me.txtUsuLogin.TabIndex = 1
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.ForeColor = System.Drawing.Color.Red
+        Me.Label13.Location = New System.Drawing.Point(8, 26)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(33, 13)
+        Me.Label13.TabIndex = 5
+        Me.Label13.Text = "Login"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(8, 3)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(109, 13)
+        Me.Label12.TabIndex = 4
+        Me.Label12.Text = "Incluir novos usuários"
+        '
+        'cbxEmpresaUsaUsuario
+        '
+        Me.cbxEmpresaUsaUsuario.AutoSize = True
+        Me.cbxEmpresaUsaUsuario.Location = New System.Drawing.Point(478, 25)
+        Me.cbxEmpresaUsaUsuario.Name = "cbxEmpresaUsaUsuario"
+        Me.cbxEmpresaUsaUsuario.Size = New System.Drawing.Size(124, 17)
+        Me.cbxEmpresaUsaUsuario.TabIndex = 3
+        Me.cbxEmpresaUsaUsuario.Text = "Empresa usa usuário"
+        Me.cbxEmpresaUsaUsuario.UseVisualStyleBackColor = True
+        '
+        'lbUsuarios
+        '
+        Me.lbUsuarios.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.lbUsuarios.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbUsuarios.FormattingEnabled = True
+        Me.lbUsuarios.ItemHeight = 14
+        Me.lbUsuarios.Location = New System.Drawing.Point(3, 91)
+        Me.lbUsuarios.Name = "lbUsuarios"
+        Me.lbUsuarios.Size = New System.Drawing.Size(604, 158)
+        Me.lbUsuarios.TabIndex = 10
+        '
         'Label1
         '
         Me.Label1.Dock = System.Windows.Forms.DockStyle.Top
@@ -472,74 +700,6 @@ Partial Class TelaPrincipal
         Me.lbEmpresas.Name = "lbEmpresas"
         Me.lbEmpresas.Size = New System.Drawing.Size(618, 140)
         Me.lbEmpresas.TabIndex = 2
-        '
-        'tpTelas
-        '
-        Me.tpTelas.Controls.Add(Me.btnTelaRemove)
-        Me.tpTelas.Controls.Add(Me.btnTelaAdd)
-        Me.tpTelas.Controls.Add(Me.Label11)
-        Me.tpTelas.Controls.Add(Me.Label10)
-        Me.tpTelas.Controls.Add(Me.lsbTelasLiberadas)
-        Me.tpTelas.Controls.Add(Me.lsbTelas)
-        Me.tpTelas.Location = New System.Drawing.Point(4, 22)
-        Me.tpTelas.Name = "tpTelas"
-        Me.tpTelas.Padding = New System.Windows.Forms.Padding(3)
-        Me.tpTelas.Size = New System.Drawing.Size(610, 252)
-        Me.tpTelas.TabIndex = 3
-        Me.tpTelas.Text = "Telas/Programas"
-        Me.tpTelas.UseVisualStyleBackColor = True
-        '
-        'lsbTelas
-        '
-        Me.lsbTelas.FormattingEnabled = True
-        Me.lsbTelas.Location = New System.Drawing.Point(8, 28)
-        Me.lsbTelas.Name = "lsbTelas"
-        Me.lsbTelas.Size = New System.Drawing.Size(280, 212)
-        Me.lsbTelas.TabIndex = 0
-        '
-        'lsbTelasLiberadas
-        '
-        Me.lsbTelasLiberadas.FormattingEnabled = True
-        Me.lsbTelasLiberadas.Location = New System.Drawing.Point(322, 28)
-        Me.lsbTelasLiberadas.Name = "lsbTelasLiberadas"
-        Me.lsbTelasLiberadas.Size = New System.Drawing.Size(280, 212)
-        Me.lsbTelasLiberadas.TabIndex = 1
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(8, 12)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(142, 13)
-        Me.Label10.TabIndex = 2
-        Me.Label10.Text = "Telas que existe no sistemas"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(350, 11)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(216, 13)
-        Me.Label11.TabIndex = 3
-        Me.Label11.Text = "Telas que a empresa selecionada pode usar"
-        '
-        'btnTelaAdd
-        '
-        Me.btnTelaAdd.Location = New System.Drawing.Point(292, 104)
-        Me.btnTelaAdd.Name = "btnTelaAdd"
-        Me.btnTelaAdd.Size = New System.Drawing.Size(27, 23)
-        Me.btnTelaAdd.TabIndex = 4
-        Me.btnTelaAdd.Text = ">>"
-        Me.btnTelaAdd.UseVisualStyleBackColor = True
-        '
-        'btnTelaRemove
-        '
-        Me.btnTelaRemove.Location = New System.Drawing.Point(292, 133)
-        Me.btnTelaRemove.Name = "btnTelaRemove"
-        Me.btnTelaRemove.Size = New System.Drawing.Size(27, 23)
-        Me.btnTelaRemove.TabIndex = 5
-        Me.btnTelaRemove.Text = "<<"
-        Me.btnTelaRemove.UseVisualStyleBackColor = True
         '
         'TelaPrincipal
         '
@@ -566,6 +726,8 @@ Partial Class TelaPrincipal
         Me.tpNovoEmpresa.PerformLayout()
         Me.tpTelas.ResumeLayout(False)
         Me.tpTelas.PerformLayout()
+        Me.tpUsuarios.ResumeLayout(False)
+        Me.tpUsuarios.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -614,5 +776,19 @@ Partial Class TelaPrincipal
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents lsbTelasLiberadas As System.Windows.Forms.ListBox
     Friend WithEvents lsbTelas As System.Windows.Forms.ListBox
+    Friend WithEvents tpUsuarios As System.Windows.Forms.TabPage
+    Friend WithEvents btnUsuReset As System.Windows.Forms.Button
+    Friend WithEvents rbUsuInativo As System.Windows.Forms.RadioButton
+    Friend WithEvents rbUsuAtivo As System.Windows.Forms.RadioButton
+    Friend WithEvents txtUsuEmail As System.Windows.Forms.TextBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents txtUsuNome As System.Windows.Forms.TextBox
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents btnUsuGravar As System.Windows.Forms.Button
+    Friend WithEvents txtUsuLogin As System.Windows.Forms.TextBox
+    Friend WithEvents Label13 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents cbxEmpresaUsaUsuario As System.Windows.Forms.CheckBox
+    Friend WithEvents lbUsuarios As System.Windows.Forms.ListBox
 
 End Class

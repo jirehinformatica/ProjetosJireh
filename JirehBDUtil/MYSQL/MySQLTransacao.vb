@@ -5,10 +5,11 @@ Public Class MySQLTransacao
     Private tx As MySqlTransaction
     Private Cnx As MySQL
 
-    Public Sub New(ByVal Conexao As MySQL)
+    Public Sub New(ByRef Conexao As MySQL)
         Try
             Cnx = Conexao
             Abriu = False
+            AberturaCount = 0
         Catch ex As Exception
             Throw
         End Try
@@ -61,7 +62,10 @@ Public Class MySQLTransacao
 
             AberturaCount = 0
             If Abriu Then
-                tx.Rollback()
+                Try
+                    tx.Rollback()
+                Catch ex As Exception
+                End Try
             End If
             Abriu = False
 

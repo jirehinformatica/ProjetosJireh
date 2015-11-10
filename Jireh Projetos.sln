@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "JirehComprovante", "JirehComprovante\JirehComprovante.vbproj", "{134D9497-C587-487B-8F46-543432FEC506}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "JirehReports", "JirehReports\JirehReports.vbproj", "{1FA88B53-133D-4858-BBA5-2EF3447C7BB3}"
@@ -12,6 +14,8 @@ EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "SetupJirehComprovantes", "SetupJirehComprovantes\SetupJirehComprovantes.isproj", "{1D8DD9E4-2D4A-425F-BF7D-2E8C8AE3D967}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LiberadorJireh", "LiberadorJireh\LiberadorJireh.vbproj", "{AF1D2AAD-1F4A-47E0-A933-2332FB2D08D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite", "WebSite\WebSite.csproj", "{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,6 +86,16 @@ Global
 		{AF1D2AAD-1F4A-47E0-A933-2332FB2D08D8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF1D2AAD-1F4A-47E0-A933-2332FB2D08D8}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{AF1D2AAD-1F4A-47E0-A933-2332FB2D08D8}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

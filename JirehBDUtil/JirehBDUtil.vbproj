@@ -43,10 +43,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\MySql.Data.dll</HintPath>
-    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Management" />
@@ -77,6 +74,7 @@
     <Compile Include="BD\Dal_SerialHd.vb" />
     <Compile Include="BD\Dal_Telas.vb" />
     <Compile Include="BD\Dal_TelasEmpresas.vb" />
+    <Compile Include="BD\Dal_Usuarios.vb" />
     <Compile Include="ChaveExecucao.vb" />
     <Compile Include="CriptografiaSistema.vb" />
     <Compile Include="Email.vb" />

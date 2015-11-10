@@ -33,6 +33,7 @@ Public Class Dal_Empresas
         Public Property Cadastro_emp As DateTime
         Public Property Vencimento_emp As DateTime
         Public Property Ativo_emp As Boolean
+        Public Property UsaLogin_emp As Boolean
     End Class
 
     Public MustInherit Class EmpresasColunmsName
@@ -44,6 +45,7 @@ Public Class Dal_Empresas
         Public Const Cadastro_emp As String = "Cadastro_emp"
         Public Const Vencimento_emp As String = "Vencimento_emp"
         Public Const Ativo_emp As String = "Ativo_emp"
+        Public Const UsaLogin_emp As String = "UsaLogin_emp"
     End Class
 
     Public Sub Inserir(ByVal Item As EmpresasColunms)
@@ -60,6 +62,7 @@ Public Class Dal_Empresas
             Sintaxe.AppendFormat("{0}, ", EmpresasColunmsName.Cnpj_emp)
             Sintaxe.AppendFormat("{0}, ", EmpresasColunmsName.Fantasia_emp)
             Sintaxe.AppendFormat("{0}, ", EmpresasColunmsName.RazaoSocial_emp)
+            Sintaxe.AppendFormat("{0}, ", EmpresasColunmsName.UsaLogin_emp)
             Sintaxe.AppendFormat("{0}) ", EmpresasColunmsName.Vencimento_emp)
 
             Sintaxe.AppendFormat("VALUES(@{0}, ", EmpresasColunmsName.Ativo_emp)
@@ -72,6 +75,8 @@ Public Class Dal_Empresas
             Parametros.Add(EmpresasColunmsName.Fantasia_emp, Item.Fantasia_emp, MySqlDbType.VarChar)
             Sintaxe.AppendFormat("@{0},", EmpresasColunmsName.RazaoSocial_emp)
             Parametros.Add(EmpresasColunmsName.RazaoSocial_emp, Item.RazaoSocial_emp, MySqlDbType.VarChar)
+            Sintaxe.AppendFormat("@{0},", EmpresasColunmsName.UsaLogin_emp)
+            Parametros.Add(EmpresasColunmsName.UsaLogin_emp, Item.UsaLogin_emp, MySqlDbType.Bit)
             Sintaxe.AppendFormat("@{0})", EmpresasColunmsName.Vencimento_emp)
             Parametros.Add(EmpresasColunmsName.Vencimento_emp, Item.Vencimento_emp, MySqlDbType.DateTime)
 
@@ -121,6 +126,8 @@ Public Class Dal_Empresas
 
             Sintaxe.AppendFormat("{0} = @{0}, ", EmpresasColunmsName.Ativo_emp)
             Parametros.Add(EmpresasColunmsName.Ativo_emp, Item.Ativo_emp, MySqlDbType.Bit)
+            Sintaxe.AppendFormat("{0} = @{0}, ", EmpresasColunmsName.UsaLogin_emp)
+            Parametros.Add(EmpresasColunmsName.UsaLogin_emp, Item.UsaLogin_emp, MySqlDbType.Bit)
             Sintaxe.AppendFormat("{0} = @{0}, ", EmpresasColunmsName.Cadastro_emp)
             Parametros.Add(EmpresasColunmsName.Cadastro_emp, Item.Cadastro_emp, MySqlDbType.DateTime)
             Sintaxe.AppendFormat("{0} = @{0}, ", EmpresasColunmsName.Fantasia_emp)
@@ -165,6 +172,7 @@ Public Class Dal_Empresas
             Dim item As New EmpresasColunms
             If Row IsNot Nothing Then
                 item.Ativo_emp = Row(EmpresasColunmsName.Ativo_emp).ToString.ToBool
+                item.UsaLogin_emp = Row(EmpresasColunmsName.UsaLogin_emp).ToString.ToBool
                 item.Cadastro_emp = Row(EmpresasColunmsName.Cadastro_emp).ToString.ToDate
                 item.Cnpj_emp = Row(EmpresasColunmsName.Cnpj_emp).ToString
                 item.Fantasia_emp = Row(EmpresasColunmsName.Fantasia_emp).ToString

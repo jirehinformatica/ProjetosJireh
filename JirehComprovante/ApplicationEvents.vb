@@ -74,20 +74,31 @@
 
                 F.AddPasso("Verificando se o sistema está ativo")
                 If Not JirehBDUtil.InfoRegistro.InformacoesUso.Ativo Then
-                    If JirehBDUtil.InfoRegistro.SerialHDLocal.Length = 0 Then
-                        Alerta("Não é possível fazer a ativaçao do sistema sem a utilização de um disco local.")
-                        Exit Sub
+
+                    If JirehBDUtil.InfoRegistro.InformacoesServidor.Ativou_mai AndAlso JirehBDUtil.InfoRegistro.InformacoesServidor.Ativo_emp Then
+                        F.AddPasso("Atualizando informações da chave de ativação")
+                        Dim Ger As New JirehBDUtil.Dal_SerialHd(JirehBDUtil.CnMySQL)
+                        Dim Numero As Integer = Ger.Consultar(JirehBDUtil.InfoRegistro.SerialHDLocal(0))
+                        JirehBDUtil.InfoRegistro.RegistrarPc(JirehBDUtil.InfoRegistro.InformacoesUso.CNPJ, Numero, Date.Now)
+                    Else
+
+                        If JirehBDUtil.InfoRegistro.SerialHDLocal.Length = 0 Then
+                            Alerta("Não é possível fazer a ativaçao do sistema sem a utilização de um disco local.")
+                            Exit Sub
+                        End If
+                        JirehBDUtil.InfoRegistro.InformacoesUso.Serial = JirehBDUtil.InfoRegistro.SerialHDLocal(0)
+                        F.Hide()
+                        Dim Ativ As New AtivadorSistema
+                        Ativ.ShowDialog()
+                        Ativ.Dispose()
+                        If Not JirehBDUtil.InfoRegistro.InformacoesUso.Ativo Then
+                            F.Dispose()
+                            Exit Sub
+                        End If
+                        F.Show()
+
                     End If
-                    JirehBDUtil.InfoRegistro.InformacoesUso.Serial = JirehBDUtil.InfoRegistro.SerialHDLocal(0)
-                    F.Hide()
-                    Dim Ativ As New AtivadorSistema
-                    Ativ.ShowDialog()
-                    Ativ.Dispose()
-                    If Not JirehBDUtil.InfoRegistro.InformacoesUso.Ativo Then
-                        F.Dispose()
-                        Exit Sub
-                    End If
-                    F.Show()
+
                 End If
 
                 F.AddPasso("Ativando o terminal")
@@ -102,13 +113,31 @@
                 End If
                 PathAplicativo = aux
 
-                Threading.Thread.Sleep(500)
+                F.AddPasso("Buscando as informações da empresa para utilização")
 
                 F.Close()
                 F.Dispose()
                 If Not JirehBDUtil.InfoRegistro.InformacoesUso.Ativo Then
                     Exit Sub
                 End If
+
+                Dim GerEmp As New JirehBDUtil.Dal_Empresas(JirehBDUtil.CnMySQL)
+                Dim InfoEmpresa As JirehBDUtil.Dal_Empresas.EmpresasColunms = GerEmp.Consultar(JirehBDUtil.InfoRegistro.InformacoesUso.CNPJ)
+                JirehBDUtil.InfoRegistro.InformacoesUso.UsarLogin = InfoEmpresa.UsaLogin_emp
+
+                'Se o sistema estiver configurado para usar login abre a janela
+                If InfoEmpresa.UsaLogin_emp Then
+
+                    Dim FLog As New Login
+                    FLog.ShowDialog()
+
+                    'Verifica se foi autorizado o uso do sistema
+                    If FLog.Encerrar OrElse Not FLog.ValidoSenha Then
+                        Exit Sub
+                    End If
+
+                End If
+
                 MyBase.OnRun()
 
             Catch ex As Exception
