@@ -110,10 +110,22 @@
     <Compile Include="Comprovante.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DebitoAutomatico.Designer.vb">
+      <DependentUpon>DebitoAutomatico.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DebitoAutomatico.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Extrato.Designer.vb">
       <DependentUpon>Extrato.vb</DependentUpon>
     </Compile>
     <Compile Include="Extrato.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GerenciadorDebito\CadastroPessoas.Designer.vb">
+      <DependentUpon>CadastroPessoas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GerenciadorDebito\CadastroPessoas.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.vb">
@@ -164,8 +176,14 @@
     <EmbeddedResource Include="Comprovante.resx">
       <DependentUpon>Comprovante.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DebitoAutomatico.resx">
+      <DependentUpon>DebitoAutomatico.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Extrato.resx">
       <DependentUpon>Extrato.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GerenciadorDebito\CadastroPessoas.resx">
+      <DependentUpon>CadastroPessoas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -248,6 +266,10 @@
       <Project>{5e8715c2-ecac-4fa5-8938-3ea501f8fd1e}</Project>
       <Name>JirehBDUtil</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JirehDataGrid\JirehDataGrid.vbproj">
+      <Project>{eb065733-0d83-449a-a9fd-7931615a99dd}</Project>
+      <Name>JirehDataGrid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JirehLayouts\JirehLayouts.vbproj">
       <Project>{a520c65a-2deb-4586-8dc7-edf57fe98ec0}</Project>
       <Name>JirehLayouts</Name>
@@ -271,6 +293,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Extrato16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pessoas24_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Anterior24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cancelar24_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Excluir24_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fechar24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gravar24_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Novo24_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Proximo24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New24_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save24_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\buscar_cep.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

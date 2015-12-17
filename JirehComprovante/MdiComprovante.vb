@@ -134,6 +134,10 @@
 
     Private Sub SairTootStripMenuItem_Click(sender As Object, e As EventArgs) Handles SairTootStripMenuItem.Click, tsbSair.Click
         Try
+            Dim F As New CadastroPessoas
+            F.ShowDialog()
+            F.Dispose()
+
             FormularioMDI.Close()
         Catch ex As Exception
             TratarErros(ex)

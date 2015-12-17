@@ -17,6 +17,8 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "LiberadorJireh", "Liberador
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSite", "WebSite\WebSite.csproj", "{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "JirehDataGrid", "JirehDataGrid\JirehDataGrid.vbproj", "{EB065733-0D83-449A-A9FD-7931615A99DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -96,6 +98,16 @@ Global
 		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{8674EFDC-4F16-46DA-B5A1-7AA4F04FE235}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{EB065733-0D83-449A-A9FD-7931615A99DD}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
