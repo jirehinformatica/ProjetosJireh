@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Script\JQuery\jquery-2.1.4.min.map" />
+    <None Include="Properties\PublishProfiles\JirehSite.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

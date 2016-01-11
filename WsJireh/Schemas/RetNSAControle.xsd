@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://jireh.net/">
+  <xs:element name="ControleNSA">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="Sucesso"/>
+        <xs:element type="xs:string" name="NumeroNSA"/>
+        <xs:element type="xs:string" name="Codigo"/>
+        <xs:element type="xs:string" name="Mensagem"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

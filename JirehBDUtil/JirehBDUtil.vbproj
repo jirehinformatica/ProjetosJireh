@@ -71,6 +71,7 @@
     <Compile Include="Arquivos.vb" />
     <Compile Include="BD\Dal_ContaCorrente.vb" />
     <Compile Include="BD\Dal_ConveniosEmpresa.vb" />
+    <Compile Include="BD\Dal_EmpresaNsa.vb" />
     <Compile Include="BD\Dal_Empresas.vb" />
     <Compile Include="BD\Dal_Geral.vb" />
     <Compile Include="BD\Dal_MaquinasAtivas.vb" />

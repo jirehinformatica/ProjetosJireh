@@ -85,6 +85,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Remessa\Controles\InfoCedente.vb" />
+    <Compile Include="Remessa\Controles\InfoNossoNumero.vb" />
+    <Compile Include="Remessa\Controles\InfoPessoa.vb" />
+    <Compile Include="Remessa\Controles\InfoRemessa.vb" />
+    <Compile Include="Remessa\Controles\InfoSacado.vb" />
+    <Compile Include="Remessa\IRemessa.vb" />
+    <Compile Include="Remessa\RemessaFactory.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
