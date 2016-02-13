@@ -85,6 +85,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Remessa\Bancos\CaixaCIGCB240.vb" />
+    <Compile Include="Remessa\Bancos\Padrao\ArquivoRemessa.vb" />
+    <Compile Include="Remessa\Bancos\Padrao\Enumeradores.vb" />
+    <Compile Include="Remessa\Bancos\Padrao\LayoutsDescricao.vb" />
     <Compile Include="Remessa\Controles\InfoCedente.vb" />
     <Compile Include="Remessa\Controles\InfoNossoNumero.vb" />
     <Compile Include="Remessa\Controles\InfoPessoa.vb" />
@@ -112,6 +116,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

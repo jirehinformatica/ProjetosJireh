@@ -54,7 +54,7 @@
         End Try
     End Sub
 
-    Private Sub btnConsultaCep_Click(sender As Object, e As EventArgs)
+    Private Sub btnConsultaCep_Click(sender As Object, e As EventArgs) Handles btnConsultaCep.Click
         Try
             If String.IsNullOrEmpty(JirehBDUtil.ToNumeros(txtCep.Text)) Then
                 Alerta("Informe o cep para consulta.")

@@ -1,6 +1,7 @@
 ﻿Public MustInherit Class InfoPessoa
 
     Public Overridable Property CnpjCpf As String
+    Public Overridable Property TipoInscricao As TipoCpfCnpj
     Public Overridable Property NomeRazao As String
     Public Overridable Property BancoCodigo As String
     'Não é necessário o nome do banco, isso será preenchido de forma automática

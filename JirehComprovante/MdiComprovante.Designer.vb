@@ -25,27 +25,29 @@ Partial Class MdiComprovante
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MdiComprovante))
         Me.ssStatus = New System.Windows.Forms.StatusStrip()
         Me.ttsHora = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tssVersao = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.tssSep01 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ttsTerminal = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ttsProgresso = New System.Windows.Forms.ToolStripProgressBar()
         Me.ttsPorcent = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ttsCancelar = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ttsPrompt = New System.Windows.Forms.ToolStripStatusLabel()
         Me.msMenu = New System.Windows.Forms.MenuStrip()
         Me.EmissãoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsAtalho = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsbComprovante = New System.Windows.Forms.ToolStripButton()
-        Me.tsbExtrato = New System.Windows.Forms.ToolStripButton()
-        Me.tsbSair = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.tssSep01 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ttsCancelar = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel3 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ComprovanteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExtratoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DebitoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.SairTootStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsAtalho = New System.Windows.Forms.ToolStrip()
+        Me.tsbComprovante = New System.Windows.Forms.ToolStripButton()
+        Me.tsbExtrato = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.tsbSair = New System.Windows.Forms.ToolStripButton()
+        Me.tsbDebito = New System.Windows.Forms.ToolStripButton()
         Me.ssStatus.SuspendLayout()
         Me.msMenu.SuspendLayout()
         Me.tsAtalho.SuspendLayout()
@@ -69,6 +71,14 @@ Partial Class MdiComprovante
         Me.ttsHora.Size = New System.Drawing.Size(80, 25)
         Me.ttsHora.Text = "data hora"
         '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripStatusLabel1.Image = Global.JirehComprovante.My.Resources.Resources.sep24x24
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(24, 25)
+        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
+        '
         'tssVersao
         '
         Me.tssVersao.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
@@ -77,12 +87,26 @@ Partial Class MdiComprovante
         Me.tssVersao.Size = New System.Drawing.Size(56, 25)
         Me.tssVersao.Text = "Versao"
         '
+        'tssSep01
+        '
+        Me.tssSep01.Image = Global.JirehComprovante.My.Resources.Resources.sep24x24
+        Me.tssSep01.Name = "tssSep01"
+        Me.tssSep01.Size = New System.Drawing.Size(24, 25)
+        '
         'ttsTerminal
         '
         Me.ttsTerminal.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Bold)
         Me.ttsTerminal.Name = "ttsTerminal"
         Me.ttsTerminal.Size = New System.Drawing.Size(72, 25)
         Me.ttsTerminal.Text = "Terminal"
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripStatusLabel2.Image = Global.JirehComprovante.My.Resources.Resources.sep24x24
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(24, 25)
+        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
         '
         'ttsProgresso
         '
@@ -98,96 +122,6 @@ Partial Class MdiComprovante
         Me.ttsPorcent.Name = "ttsPorcent"
         Me.ttsPorcent.Size = New System.Drawing.Size(48, 25)
         Me.ttsPorcent.Text = "100 %"
-        '
-        'ttsPrompt
-        '
-        Me.ttsPrompt.Name = "ttsPrompt"
-        Me.ttsPrompt.Size = New System.Drawing.Size(141, 25)
-        Me.ttsPrompt.Text = "mensagem em progresso"
-        '
-        'msMenu
-        '
-        Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmissãoToolStripMenuItem})
-        Me.msMenu.Location = New System.Drawing.Point(0, 0)
-        Me.msMenu.Name = "msMenu"
-        Me.msMenu.Size = New System.Drawing.Size(718, 24)
-        Me.msMenu.TabIndex = 2
-        '
-        'EmissãoToolStripMenuItem
-        '
-        Me.EmissãoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComprovanteToolStripMenuItem, Me.ExtratoToolStripMenuItem, Me.ToolStripSeparator1, Me.SairTootStripMenuItem})
-        Me.EmissãoToolStripMenuItem.Name = "EmissãoToolStripMenuItem"
-        Me.EmissãoToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
-        Me.EmissãoToolStripMenuItem.Text = "&Emissão"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(149, 6)
-        '
-        'tsAtalho
-        '
-        Me.tsAtalho.ImageScalingSize = New System.Drawing.Size(32, 32)
-        Me.tsAtalho.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbComprovante, Me.tsbExtrato, Me.ToolStripSeparator2, Me.tsbSair})
-        Me.tsAtalho.Location = New System.Drawing.Point(0, 24)
-        Me.tsAtalho.Name = "tsAtalho"
-        Me.tsAtalho.Size = New System.Drawing.Size(718, 39)
-        Me.tsAtalho.TabIndex = 3
-        Me.tsAtalho.Text = "ToolStrip1"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 39)
-        '
-        'tsbComprovante
-        '
-        Me.tsbComprovante.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbComprovante.Image = Global.JirehComprovante.My.Resources.Resources.comprovante32x32
-        Me.tsbComprovante.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbComprovante.Name = "tsbComprovante"
-        Me.tsbComprovante.Size = New System.Drawing.Size(36, 36)
-        Me.tsbComprovante.ToolTipText = "Emissão comprovante"
-        '
-        'tsbExtrato
-        '
-        Me.tsbExtrato.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbExtrato.Image = Global.JirehComprovante.My.Resources.Resources.Extrato24x24
-        Me.tsbExtrato.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbExtrato.Name = "tsbExtrato"
-        Me.tsbExtrato.Size = New System.Drawing.Size(36, 36)
-        Me.tsbExtrato.ToolTipText = "Extrato bancário"
-        '
-        'tsbSair
-        '
-        Me.tsbSair.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbSair.Image = Global.JirehComprovante.My.Resources.Resources.Sair32x32
-        Me.tsbSair.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbSair.Name = "tsbSair"
-        Me.tsbSair.Size = New System.Drawing.Size(36, 36)
-        Me.tsbSair.ToolTipText = "Sair do Sistema"
-        '
-        'ToolStripStatusLabel1
-        '
-        Me.ToolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripStatusLabel1.Image = Global.JirehComprovante.My.Resources.Resources.sep24x24
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(24, 25)
-        Me.ToolStripStatusLabel1.Text = "ToolStripStatusLabel1"
-        '
-        'tssSep01
-        '
-        Me.tssSep01.Image = Global.JirehComprovante.My.Resources.Resources.sep24x24
-        Me.tssSep01.Name = "tssSep01"
-        Me.tssSep01.Size = New System.Drawing.Size(24, 25)
-        '
-        'ToolStripStatusLabel2
-        '
-        Me.ToolStripStatusLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripStatusLabel2.Image = Global.JirehComprovante.My.Resources.Resources.sep24x24
-        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(24, 25)
-        Me.ToolStripStatusLabel2.Text = "ToolStripStatusLabel2"
         '
         'ttsCancelar
         '
@@ -208,27 +142,111 @@ Partial Class MdiComprovante
         Me.ToolStripStatusLabel3.Size = New System.Drawing.Size(24, 25)
         Me.ToolStripStatusLabel3.Text = "ToolStripStatusLabel3"
         '
+        'ttsPrompt
+        '
+        Me.ttsPrompt.Name = "ttsPrompt"
+        Me.ttsPrompt.Size = New System.Drawing.Size(141, 25)
+        Me.ttsPrompt.Text = "mensagem em progresso"
+        '
+        'msMenu
+        '
+        Me.msMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmissãoToolStripMenuItem})
+        Me.msMenu.Location = New System.Drawing.Point(0, 0)
+        Me.msMenu.Name = "msMenu"
+        Me.msMenu.Size = New System.Drawing.Size(718, 24)
+        Me.msMenu.TabIndex = 2
+        '
+        'EmissãoToolStripMenuItem
+        '
+        Me.EmissãoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComprovanteToolStripMenuItem, Me.ExtratoToolStripMenuItem, Me.DebitoToolStripMenuItem, Me.ToolStripSeparator1, Me.SairTootStripMenuItem})
+        Me.EmissãoToolStripMenuItem.Name = "EmissãoToolStripMenuItem"
+        Me.EmissãoToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
+        Me.EmissãoToolStripMenuItem.Text = "&Emissão"
+        '
         'ComprovanteToolStripMenuItem
         '
         Me.ComprovanteToolStripMenuItem.Image = Global.JirehComprovante.My.Resources.Resources.comprovante16x16
         Me.ComprovanteToolStripMenuItem.Name = "ComprovanteToolStripMenuItem"
-        Me.ComprovanteToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ComprovanteToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.ComprovanteToolStripMenuItem.Text = "&Comprovante"
         '
         'ExtratoToolStripMenuItem
         '
         Me.ExtratoToolStripMenuItem.Image = Global.JirehComprovante.My.Resources.Resources.Extrato16x16
         Me.ExtratoToolStripMenuItem.Name = "ExtratoToolStripMenuItem"
-        Me.ExtratoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExtratoToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.ExtratoToolStripMenuItem.Text = "E&xtrato"
+        '
+        'DebitoToolStripMenuItem
+        '
+        Me.DebitoToolStripMenuItem.Image = Global.JirehComprovante.My.Resources.Resources.icon_boleto
+        Me.DebitoToolStripMenuItem.Name = "DebitoToolStripMenuItem"
+        Me.DebitoToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.DebitoToolStripMenuItem.Text = "&Débito Automático"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(172, 6)
         '
         'SairTootStripMenuItem
         '
         Me.SairTootStripMenuItem.Image = Global.JirehComprovante.My.Resources.Resources.Sair16x16
         Me.SairTootStripMenuItem.Name = "SairTootStripMenuItem"
-        Me.SairTootStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SairTootStripMenuItem.Size = New System.Drawing.Size(175, 22)
         Me.SairTootStripMenuItem.Text = "&Sair"
         Me.SairTootStripMenuItem.ToolTipText = "Sair do Sistema"
+        '
+        'tsAtalho
+        '
+        Me.tsAtalho.ImageScalingSize = New System.Drawing.Size(32, 32)
+        Me.tsAtalho.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbComprovante, Me.tsbExtrato, Me.tsbDebito, Me.ToolStripSeparator2, Me.tsbSair})
+        Me.tsAtalho.Location = New System.Drawing.Point(0, 24)
+        Me.tsAtalho.Name = "tsAtalho"
+        Me.tsAtalho.Size = New System.Drawing.Size(718, 39)
+        Me.tsAtalho.TabIndex = 3
+        Me.tsAtalho.Text = "ToolStrip1"
+        '
+        'tsbComprovante
+        '
+        Me.tsbComprovante.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbComprovante.Image = Global.JirehComprovante.My.Resources.Resources.comprovante32x32
+        Me.tsbComprovante.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbComprovante.Name = "tsbComprovante"
+        Me.tsbComprovante.Size = New System.Drawing.Size(36, 36)
+        Me.tsbComprovante.ToolTipText = "Emissão comprovante"
+        '
+        'tsbExtrato
+        '
+        Me.tsbExtrato.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbExtrato.Image = Global.JirehComprovante.My.Resources.Resources.Extrato24x24
+        Me.tsbExtrato.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbExtrato.Name = "tsbExtrato"
+        Me.tsbExtrato.Size = New System.Drawing.Size(36, 36)
+        Me.tsbExtrato.ToolTipText = "Extrato bancário"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 39)
+        '
+        'tsbSair
+        '
+        Me.tsbSair.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbSair.Image = Global.JirehComprovante.My.Resources.Resources.Sair32x32
+        Me.tsbSair.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbSair.Name = "tsbSair"
+        Me.tsbSair.Size = New System.Drawing.Size(36, 36)
+        Me.tsbSair.ToolTipText = "Sair do Sistema"
+        '
+        'tsbDebito
+        '
+        Me.tsbDebito.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbDebito.Image = Global.JirehComprovante.My.Resources.Resources.icon_boleto
+        Me.tsbDebito.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbDebito.Name = "tsbDebito"
+        Me.tsbDebito.Size = New System.Drawing.Size(36, 36)
+        Me.tsbDebito.ToolTipText = "Débito automático"
         '
         'MdiComprovante
         '
@@ -282,4 +300,6 @@ Partial Class MdiComprovante
     Friend WithEvents ttsTerminal As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tsbExtrato As System.Windows.Forms.ToolStripButton
     Friend WithEvents ExtratoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DebitoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents tsbDebito As System.Windows.Forms.ToolStripButton
 End Class

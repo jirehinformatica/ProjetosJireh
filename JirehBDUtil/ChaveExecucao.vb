@@ -128,8 +128,7 @@ Public Class ChaveExecucao
                 If InformacoesUso.Ativo Then
 
                     Try
-                        Dim Ger As New Dal_MaquinasAtivasItens(CnMySQL, Tx)
-                        InformacoesServidor = Ger.ConsultarParaRegistro(InformacoesUso.CNPJ, InformacoesUso.CodigoSerial)
+                        BuscarInfoServidor()
 
                         Dim aux2 As String = String.Empty
                         With InformacoesServidor
@@ -226,7 +225,7 @@ Public Class ChaveExecucao
                 GerItensPc.Incluir(Item)
             End If
 
-            InformacoesServidor = GerItensPc.ConsultarParaRegistro(CNPJ, CodigoSerialHd)
+            BuscarInfoServidor(CNPJ, CodigoSerialHd)
 
             With InformacoesServidor
                 GravarInfoRegistro(.GetConveniosString, .Cnpj_emp, Data, .RazaoSocial_emp, .Quantidade_maa, .Serial_ser, .Vencimento_emp, .Estacao_sem, CodigoSerialHd)
@@ -235,6 +234,38 @@ Public Class ChaveExecucao
             Tx.CommitTransacao()
 
             CarregarInfoRegistro()
+
+        Catch ex As Exception
+            Tx.RollBackTransacao()
+            Throw
+        Finally
+            CnMySQL.Close()
+        End Try
+    End Sub
+
+    Public Sub BuscarInfoServidor(Optional ByVal CNPJ As String = "", Optional ByVal CodigoSerialHd As String = "")
+        Try
+
+            Dim GerItensPc As New Dal_MaquinasAtivasItens(CnMySQL, Tx)
+            CnMySQL.Open()
+            Tx.BeginTransacao()
+
+            If String.IsNullOrEmpty(CNPJ) Then
+                CNPJ = InformacoesUso.CNPJ
+            End If
+            If String.IsNullOrEmpty(CodigoSerialHd) Then
+                CodigoSerialHd = InformacoesUso.CodigoSerial
+            End If
+
+            If String.IsNullOrEmpty(CNPJ) OrElse String.IsNullOrEmpty(CodigoSerialHd) Then
+                InformacoesServidor = New Dal_MaquinasAtivasItens.MaquinasRegistroColunms
+                InformacoesServidor.Ativou_mai = False
+                InformacoesServidor.Ativo_emp = False
+            Else
+                InformacoesServidor = GerItensPc.ConsultarParaRegistro(CNPJ, CodigoSerialHd)
+            End If
+
+            Tx.CommitTransacao()
 
         Catch ex As Exception
             Tx.RollBackTransacao()

@@ -1,6 +1,7 @@
 ﻿Imports JirehBDUtil
 Public Class AtivadorSistema
 
+    Private ListaInfo As List(Of Dal_SerialHd.SerialHDEmpresaColunms)
     Private info As Dal_SerialHd.SerialHDEmpresaColunms
 
     Private Sub btnEnviar_Click(sender As Object, e As EventArgs) Handles btnEnviar.Click
@@ -25,6 +26,8 @@ Public Class AtivadorSistema
             Dim aux As Dal_SerialHd.SerialHDEmpresaColunms = GerLocal.ConsultarEmpresa(InfoRegistro.InformacoesUso.Serial, txtCnpj.Text)
 
             lblStatus.Text = "Preparando para enviar as informações para ativar o hardware."
+
+            BuscarDadosDaEmpresaInformada(txtCnpj.Text)
 
             If info IsNot Nothing AndAlso aux IsNot Nothing Then
 
@@ -182,14 +185,15 @@ Public Class AtivadorSistema
             lblStatus.Text = "Buscando serial de ativação, aguarde..."
             My.Application.DoEvents()
 
-            Dim aux As List(Of Dal_SerialHd.SerialHDEmpresaColunms)
-            Dim Ger As New Dal_SerialHd(CnMySQL)
-            aux = Ger.ConsultarEmpresa(InfoRegistro.InformacoesUso.Serial)
+            'Dim aux As List(Of Dal_SerialHd.SerialHDEmpresaColunms)
+            '
+            'aux = Ger.ConsultarEmpresa(InfoRegistro.InformacoesUso.Serial)
 
-            If aux IsNot Nothing AndAlso aux.Count > 0 Then
-                info = (From i In aux.AsEnumerable Where ((i.SerialAtivo IsNot Nothing AndAlso i.SerialAtivo.CnpjEmp_mai = i.Cnpj_emp) OrElse (i.SerialCadastrados IsNot Nothing _
-                                                          AndAlso i.SerialCadastrados.Count = 1 AndAlso i.SerialCadastrados(0).CnpjEmp_sem = i.Cnpj_emp))).FirstOrDefault
-            End If
+            'If aux IsNot Nothing AndAlso aux.Count > 0 Then
+            '    info = (From i In aux.AsEnumerable Where ((i.SerialAtivo IsNot Nothing AndAlso i.SerialAtivo.CnpjEmp_mai = i.Cnpj_emp) OrElse (i.SerialCadastrados IsNot Nothing _
+            '                                              AndAlso i.SerialCadastrados.Count = 1 AndAlso i.SerialCadastrados(0).CnpjEmp_sem = i.Cnpj_emp))).FirstOrDefault
+            'End If
+            BuscarDadosDaEmpresaInformada()
 
             If info IsNot Nothing Then
                 If info.Cnpj_emp.Length = 14 Then
@@ -199,6 +203,7 @@ Public Class AtivadorSistema
                 txtRazaoSocial.Text = info.RazaoSocial_emp
             Else
                 lblStatus.Text = "Verificando se o PC pode ser ativado."
+                Dim Ger As New Dal_SerialHd(CnMySQL)
                 Ger.Inserir(InfoRegistro.InformacoesUso.Serial)
             End If
 
@@ -230,6 +235,37 @@ Public Class AtivadorSistema
             End If
         Catch ex As Exception
             TratarErros(ex)
+        End Try
+    End Sub
+
+    Private Sub BuscarDadosDaEmpresaInformada(Optional ByVal CNPJ As String = "")
+        Try
+            CarregarListaEmpresasDoSerial()
+
+            If String.IsNullOrEmpty(CNPJ) Then
+                info = (From i In ListaInfo.AsEnumerable Where ((i.SerialAtivo IsNot Nothing AndAlso i.SerialAtivo.CnpjEmp_mai = i.Cnpj_emp AndAlso i.SerialAtivo.Ativou_mai) OrElse (i.SerialCadastrados IsNot Nothing _
+                                                              AndAlso i.SerialCadastrados.Count = 1 AndAlso i.SerialCadastrados(0).CnpjEmp_sem = i.Cnpj_emp))).FirstOrDefault
+            Else
+                info = (From i In ListaInfo.AsEnumerable Where i.SerialAtivo IsNot Nothing AndAlso i.Cnpj_emp = CNPJ AndAlso i.SerialCadastrados IsNot Nothing AndAlso i.SerialCadastrados.Count = 1).FirstOrDefault
+            End If
+
+        Catch ex As Exception
+            Throw
+        End Try
+    End Sub
+
+    Private Sub CarregarListaEmpresasDoSerial()
+        Try
+            If ListaInfo IsNot Nothing AndAlso ListaInfo.Count > 0 Then
+                Exit Sub
+            End If
+            ListaInfo = New List(Of Dal_SerialHd.SerialHDEmpresaColunms)
+
+            Dim Ger As New Dal_SerialHd(CnMySQL)
+            ListaInfo = Ger.ConsultarEmpresa(InfoRegistro.InformacoesUso.Serial)
+
+        Catch ex As Exception
+            Throw
         End Try
     End Sub
 

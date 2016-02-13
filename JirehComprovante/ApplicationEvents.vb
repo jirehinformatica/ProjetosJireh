@@ -75,7 +75,9 @@
                 F.AddPasso("Verificando se o sistema está ativo")
                 If Not JirehBDUtil.InfoRegistro.InformacoesUso.Ativo Then
 
-                    If JirehBDUtil.InfoRegistro.InformacoesServidor.Ativou_mai AndAlso JirehBDUtil.InfoRegistro.InformacoesServidor.Ativo_emp Then
+                    JirehBDUtil.InfoRegistro.BuscarInfoServidor()
+
+                    If (JirehBDUtil.InfoRegistro.InformacoesServidor.Ativou_mai AndAlso JirehBDUtil.InfoRegistro.InformacoesServidor.Ativo_emp) Then   'JirehBDUtil.InfoRegistro.InformacoesServidor Is Nothing OrElse
                         F.AddPasso("Atualizando informações da chave de ativação")
                         Dim Ger As New JirehBDUtil.Dal_SerialHd(JirehBDUtil.CnMySQL)
                         Dim Numero As Integer = Ger.Consultar(JirehBDUtil.InfoRegistro.SerialHDLocal(0))

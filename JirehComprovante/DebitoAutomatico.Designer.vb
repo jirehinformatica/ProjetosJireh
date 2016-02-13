@@ -31,10 +31,11 @@ Partial Class DebitoAutomatico
         '
         'tsMenu
         '
+        Me.tsMenu.Dock = System.Windows.Forms.DockStyle.Left
         Me.tsMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbPessoas, Me.tsbImprimir})
-        Me.tsMenu.Location = New System.Drawing.Point(0, 0)
+        Me.tsMenu.Location = New System.Drawing.Point(0, 23)
         Me.tsMenu.Name = "tsMenu"
-        Me.tsMenu.Size = New System.Drawing.Size(757, 38)
+        Me.tsMenu.Size = New System.Drawing.Size(58, 516)
         Me.tsMenu.TabIndex = 1
         Me.tsMenu.Text = "ToolStrip1"
         '
@@ -43,7 +44,7 @@ Partial Class DebitoAutomatico
         Me.lblCaption.BackColor = System.Drawing.Color.Ivory
         Me.lblCaption.Dock = System.Windows.Forms.DockStyle.Top
         Me.lblCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCaption.Location = New System.Drawing.Point(0, 38)
+        Me.lblCaption.Location = New System.Drawing.Point(0, 0)
         Me.lblCaption.Name = "lblCaption"
         Me.lblCaption.Size = New System.Drawing.Size(757, 23)
         Me.lblCaption.TabIndex = 3
@@ -56,7 +57,7 @@ Partial Class DebitoAutomatico
         Me.tsbPessoas.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.tsbPessoas.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbPessoas.Name = "tsbPessoas"
-        Me.tsbPessoas.Size = New System.Drawing.Size(52, 35)
+        Me.tsbPessoas.Size = New System.Drawing.Size(55, 35)
         Me.tsbPessoas.Text = "&Pessoas"
         Me.tsbPessoas.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsbPessoas.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
@@ -68,7 +69,7 @@ Partial Class DebitoAutomatico
         Me.tsbImprimir.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.tsbImprimir.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbImprimir.Name = "tsbImprimir"
-        Me.tsbImprimir.Size = New System.Drawing.Size(57, 35)
+        Me.tsbImprimir.Size = New System.Drawing.Size(55, 35)
         Me.tsbImprimir.Text = "Imprimir"
         Me.tsbImprimir.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.tsbImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
@@ -79,8 +80,8 @@ Partial Class DebitoAutomatico
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(757, 539)
-        Me.Controls.Add(Me.lblCaption)
         Me.Controls.Add(Me.tsMenu)
+        Me.Controls.Add(Me.lblCaption)
         Me.DoubleBuffered = True
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.KeyPreview = True

@@ -134,9 +134,9 @@
 
     Private Sub SairTootStripMenuItem_Click(sender As Object, e As EventArgs) Handles SairTootStripMenuItem.Click, tsbSair.Click
         Try
-            Dim F As New CadastroPessoas
-            F.ShowDialog()
-            F.Dispose()
+            'Dim F As New CadastroPessoas
+            'F.ShowDialog()
+            'F.Dispose()
 
             FormularioMDI.Close()
         Catch ex As Exception
@@ -153,6 +153,15 @@
         End Try
     End Sub
 
+    Private Sub tsbDebito_Click(sender As Object, e As EventArgs) Handles tsbDebito.Click, DebitoToolStripMenuItem.Click
+        Try
+            Dim F As New DebitoAutomatico
+            FormOpenMDI(F)
+        Catch ex As Exception
+            TratarErros(ex)
+        End Try
+    End Sub
+
     Private Sub MdiComprovante_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
             '****************************************************************
@@ -160,17 +169,17 @@
             '   Acrescentar na quantidade telas do sistemas + 1
             '   OBSERVAÇÃO: Toda nova tela representa um numero. Ex: 1 = Comprovante, 2 = extrato
 
-            Dim QuantidadeTelasSistema As Integer = 2
+            Dim QuantidadeTelasSistema As Integer = 3
 
             Dim DeParaAtalho As New Dictionary(Of Integer, String)
             Dim DeParaMenu As New Dictionary(Of Integer, String)
 
             For i As Integer = 1 To QuantidadeTelasSistema
 
-                Dim nome As String = Choose(i, "tsbComprovante", "tsbExtrato")
+                Dim nome As String = Choose(i, "tsbComprovante", "tsbExtrato", "tsbDebito")
                 DeParaAtalho.Add(i, nome)
 
-                nome = Choose(i, "ComprovanteToolStripMenuItem", "ExtratoToolStripMenuItem")
+                nome = Choose(i, "ComprovanteToolStripMenuItem", "ExtratoToolStripMenuItem", "DebitoToolStripMenuItem")
                 DeParaMenu.Add(i, nome)
 
                 tsAtalho.Items(DeParaAtalho(i)).Visible = False
@@ -189,4 +198,5 @@
             TratarErros(ex)
         End Try
     End Sub
+
 End Class

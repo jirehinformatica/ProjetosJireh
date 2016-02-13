@@ -22,8 +22,8 @@ Public Module Geral
 
     Private ReadOnly Property Homologacao As Boolean
         Get
-            Return False
-            'Return True
+            'Return False
+            Return True
         End Get
     End Property
 

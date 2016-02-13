@@ -13,7 +13,7 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\Projetos Desenvolvimento 2015\Jireh Projetos\Publicar\</PublishUrl>
+    <PublishUrl>D:\Projetos Desenvolvimento 2015\Jireh Projetos\Publicar\Executavel\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <UpdateUrl>http://www.vieiramachado.adv.br/Jireh/</UpdateUrl>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -73,6 +73,10 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="mysql.data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\JirehBDUtil\bin\Debug\mysql.data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -126,6 +130,18 @@
       <DependentUpon>CadastroPessoas.vb</DependentUpon>
     </Compile>
     <Compile Include="GerenciadorDebito\CadastroPessoas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GerenciadorDebito\EmissaoBoleto.Designer.vb">
+      <DependentUpon>EmissaoBoleto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GerenciadorDebito\EmissaoBoleto.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GerenciadorDebito\ImprimirBoleto.Designer.vb">
+      <DependentUpon>ImprimirBoleto.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GerenciadorDebito\ImprimirBoleto.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.vb">
@@ -184,6 +200,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GerenciadorDebito\CadastroPessoas.resx">
       <DependentUpon>CadastroPessoas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GerenciadorDebito\EmissaoBoleto.resx">
+      <DependentUpon>EmissaoBoleto.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GerenciadorDebito\ImprimirBoleto.resx">
+      <DependentUpon>ImprimirBoleto.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
@@ -262,6 +284,10 @@
     <None Include="Resources\Impressora24x24.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Boleto.Net\Boleto.Net.csproj">
+      <Project>{f173e80b-e36b-48ad-b483-a27f8ca86f3c}</Project>
+      <Name>Boleto.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JirehBDUtil\JirehBDUtil.vbproj">
       <Project>{5e8715c2-ecac-4fa5-8938-3ea501f8fd1e}</Project>
       <Name>JirehBDUtil</Name>
@@ -326,6 +352,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\buscar_cep.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_boleto.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

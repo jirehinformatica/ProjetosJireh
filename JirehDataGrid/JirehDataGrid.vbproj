@@ -47,7 +47,9 @@
     <Reference Include="Accessibility" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
@@ -125,6 +127,64 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DGheadernormal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imagens\001.jpg" />
+    <Content Include="Imagens\003.jpg" />
+    <Content Include="Imagens\004.jpg" />
+    <Content Include="Imagens\008.jpg" />
+    <Content Include="Imagens\021.jpg" />
+    <Content Include="Imagens\024.jpg" />
+    <Content Include="Imagens\027.jpg" />
+    <Content Include="Imagens\029.jpg" />
+    <Content Include="Imagens\033.jpg" />
+    <Content Include="Imagens\041.jpg" />
+    <Content Include="Imagens\047.jpg" />
+    <Content Include="Imagens\070.jpg" />
+    <Content Include="Imagens\104.jpg" />
+    <Content Include="Imagens\151.jpg" />
+    <Content Include="Imagens\237.jpg" />
+    <Content Include="Imagens\244.jpg" />
+    <Content Include="Imagens\246.jpg" />
+    <Content Include="Imagens\263.jpg" />
+    <Content Include="Imagens\266.jpg" />
+    <Content Include="Imagens\275.jpg" />
+    <Content Include="Imagens\291.jpg" />
+    <Content Include="Imagens\320.jpg" />
+    <Content Include="Imagens\341.jpg" />
+    <Content Include="Imagens\347.jpg" />
+    <Content Include="Imagens\353.jpg" />
+    <Content Include="Imagens\356.jpg" />
+    <Content Include="Imagens\389.jpg" />
+    <Content Include="Imagens\392.jpg" />
+    <Content Include="Imagens\399.jpg" />
+    <Content Include="Imagens\409.jpg" />
+    <Content Include="Imagens\422.jpg" />
+    <Content Include="Imagens\424.jpg" />
+    <Content Include="Imagens\453.jpg" />
+    <Content Include="Imagens\479.jpg" />
+    <Content Include="Imagens\600.jpg" />
+    <Content Include="Imagens\604.jpg" />
+    <Content Include="Imagens\610.jpg" />
+    <Content Include="Imagens\623.jpg" />
+    <Content Include="Imagens\633.jpg" />
+    <Content Include="Imagens\637.jpg" />
+    <Content Include="Imagens\641.jpg" />
+    <Content Include="Imagens\643.jpg" />
+    <Content Include="Imagens\702.jpg" />
+    <Content Include="Imagens\707.jpg" />
+    <Content Include="Imagens\721.jpg" />
+    <Content Include="Imagens\738.jpg" />
+    <Content Include="Imagens\741.jpg" />
+    <Content Include="Imagens\745.jpg" />
+    <Content Include="Imagens\748.jpg" />
+    <Content Include="Imagens\749.jpg" />
+    <Content Include="Imagens\756.jpg" />
+    <Content Include="Imagens\barra.gif" />
+    <Content Include="Imagens\barrainterna.gif" />
+    <Content Include="Imagens\BoletoBancario.bmp" />
+    <Content Include="Imagens\corte.gif" />
+    <Content Include="Imagens\ponto.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
